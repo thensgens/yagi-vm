@@ -1,0 +1,9 @@
+T__10=10
+WHITESPACE=5
+INT=6
+COMMENT=8
+ID=4
+T__9=9
+STRING=7
+'fluent'=9
+'fact'=10
