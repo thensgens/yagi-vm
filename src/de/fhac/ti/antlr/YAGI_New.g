@@ -25,7 +25,7 @@ options {
 	HashSet<String> localvars,argvars;
 	Logger LOGGER;
 	
- 	public YAGIParser(Map fluents, Map actions, TokenStream input, Logger LOGGER) 
+ 	public YAGI_NewParser(Map fluents, Map actions, TokenStream input, Logger LOGGER) 
  		throws Exception
  	{
         this(input, new RecognizerSharedState());
@@ -55,10 +55,10 @@ declaration:	fluent_decl {System.out.println("in declaration grammar rule...");}
 block:		;
 
 	
-fluent_decl:	'fluent' ID {System.out.println("in fluent_decl grammar rule...");} ;
+fluent_decl:	'fluent' ID ';' {System.out.println("in fluent_decl grammar rule...");} ;
 
 
-fact_decl:	'fact' ID {System.out.println("in fact_decl grammar rule...");} ;
+fact_decl:	'fact' ID ';'   {System.out.println("in fact_decl grammar rule...");} ;
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////

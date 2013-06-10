@@ -29,8 +29,10 @@ public class YAGICommandLine {
 	    // YAGI Interpreter loop
 		Boolean multipleLines = false;
 		String multipleLinesInput = "";
-	    Scanner scanner = new Scanner(System.in);
-		while (true) {
+	    //Scanner scanner = new Scanner(System.in);
+        Scanner scanner = new Scanner(new FileInputStream(new File
+                ("/home/thens/yagi/yagi-vm/src/de/fhac/ti/sample_input.y")));
+        while (true) {
 			if (!multipleLines){
 				System.out.print("YAGI>> ");
 			}

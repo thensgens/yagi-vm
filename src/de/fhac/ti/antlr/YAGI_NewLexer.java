@@ -1,4 +1,4 @@
-// $ANTLR 3.1.3 May 27, 2013 16:53:35 /home/thens/yagi/yagi-modified/src/de/fhac/ti/antlr/YAGI_New.g 2013-06-10 13:45:38
+// $ANTLR 3.1.3 May 27, 2013 16:53:35 /home/thens/yagi/yagi-vm/src/de/fhac/ti/antlr/YAGI_New.g 2013-06-10 14:05:42
 package de.fhac.ti.antlr;
 
 import org.antlr.runtime.*;
@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.ArrayList;
 
 public class YAGI_NewLexer extends Lexer {
+    public static final int T__11=11;
     public static final int T__10=10;
     public static final int WHITESPACE=5;
     public static final int INT=6;
@@ -27,15 +28,15 @@ public class YAGI_NewLexer extends Lexer {
         super(input,state);
 
     }
-    public String getGrammarFileName() { return "/home/thens/yagi/yagi-modified/src/de/fhac/ti/antlr/YAGI_New.g"; }
+    public String getGrammarFileName() { return "/home/thens/yagi/yagi-vm/src/de/fhac/ti/antlr/YAGI_New.g"; }
 
     // $ANTLR start "T__9"
     public final void mT__9() throws RecognitionException {
         try {
             int _type = T__9;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/thens/yagi/yagi-modified/src/de/fhac/ti/antlr/YAGI_New.g:9:6: ( 'fluent' )
-            // /home/thens/yagi/yagi-modified/src/de/fhac/ti/antlr/YAGI_New.g:9:8: 'fluent'
+            // /home/thens/yagi/yagi-vm/src/de/fhac/ti/antlr/YAGI_New.g:9:6: ( 'fluent' )
+            // /home/thens/yagi/yagi-vm/src/de/fhac/ti/antlr/YAGI_New.g:9:8: 'fluent'
             {
             match("fluent"); 
 
@@ -55,8 +56,28 @@ public class YAGI_NewLexer extends Lexer {
         try {
             int _type = T__10;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/thens/yagi/yagi-modified/src/de/fhac/ti/antlr/YAGI_New.g:10:7: ( 'fact' )
-            // /home/thens/yagi/yagi-modified/src/de/fhac/ti/antlr/YAGI_New.g:10:9: 'fact'
+            // /home/thens/yagi/yagi-vm/src/de/fhac/ti/antlr/YAGI_New.g:10:7: ( ';' )
+            // /home/thens/yagi/yagi-vm/src/de/fhac/ti/antlr/YAGI_New.g:10:9: ';'
+            {
+            match(';'); 
+
+            }
+
+            state.type = _type;
+            state.channel = _channel;
+        }
+        finally {
+        }
+    }
+    // $ANTLR end "T__10"
+
+    // $ANTLR start "T__11"
+    public final void mT__11() throws RecognitionException {
+        try {
+            int _type = T__11;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
+            // /home/thens/yagi/yagi-vm/src/de/fhac/ti/antlr/YAGI_New.g:11:7: ( 'fact' )
+            // /home/thens/yagi/yagi-vm/src/de/fhac/ti/antlr/YAGI_New.g:11:9: 'fact'
             {
             match("fact"); 
 
@@ -69,17 +90,17 @@ public class YAGI_NewLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "T__10"
+    // $ANTLR end "T__11"
 
     // $ANTLR start "WHITESPACE"
     public final void mWHITESPACE() throws RecognitionException {
         try {
             int _type = WHITESPACE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/thens/yagi/yagi-modified/src/de/fhac/ti/antlr/YAGI_New.g:68:11: ( ( '\\t' | ' ' | '\\r' | '\\n' | '\\u000C' )+ )
-            // /home/thens/yagi/yagi-modified/src/de/fhac/ti/antlr/YAGI_New.g:68:13: ( '\\t' | ' ' | '\\r' | '\\n' | '\\u000C' )+
+            // /home/thens/yagi/yagi-vm/src/de/fhac/ti/antlr/YAGI_New.g:68:11: ( ( '\\t' | ' ' | '\\r' | '\\n' | '\\u000C' )+ )
+            // /home/thens/yagi/yagi-vm/src/de/fhac/ti/antlr/YAGI_New.g:68:13: ( '\\t' | ' ' | '\\r' | '\\n' | '\\u000C' )+
             {
-            // /home/thens/yagi/yagi-modified/src/de/fhac/ti/antlr/YAGI_New.g:68:13: ( '\\t' | ' ' | '\\r' | '\\n' | '\\u000C' )+
+            // /home/thens/yagi/yagi-vm/src/de/fhac/ti/antlr/YAGI_New.g:68:13: ( '\\t' | ' ' | '\\r' | '\\n' | '\\u000C' )+
             int cnt1=0;
             loop1:
             do {
@@ -93,7 +114,7 @@ public class YAGI_NewLexer extends Lexer {
 
                 switch (alt1) {
             	case 1 :
-            	    // /home/thens/yagi/yagi-modified/src/de/fhac/ti/antlr/YAGI_New.g:
+            	    // /home/thens/yagi/yagi-vm/src/de/fhac/ti/antlr/YAGI_New.g:
             	    {
             	    if ( (input.LA(1)>='\t' && input.LA(1)<='\n')||(input.LA(1)>='\f' && input.LA(1)<='\r')||input.LA(1)==' ' ) {
             	        input.consume();
@@ -134,8 +155,8 @@ public class YAGI_NewLexer extends Lexer {
         try {
             int _type = ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/thens/yagi/yagi-modified/src/de/fhac/ti/antlr/YAGI_New.g:70:3: ( ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' )* )
-            // /home/thens/yagi/yagi-modified/src/de/fhac/ti/antlr/YAGI_New.g:70:6: ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' )*
+            // /home/thens/yagi/yagi-vm/src/de/fhac/ti/antlr/YAGI_New.g:70:3: ( ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' )* )
+            // /home/thens/yagi/yagi-vm/src/de/fhac/ti/antlr/YAGI_New.g:70:6: ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' )*
             {
             if ( (input.LA(1)>='A' && input.LA(1)<='Z')||input.LA(1)=='_'||(input.LA(1)>='a' && input.LA(1)<='z') ) {
                 input.consume();
@@ -146,7 +167,7 @@ public class YAGI_NewLexer extends Lexer {
                 recover(mse);
                 throw mse;}
 
-            // /home/thens/yagi/yagi-modified/src/de/fhac/ti/antlr/YAGI_New.g:70:30: ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' )*
+            // /home/thens/yagi/yagi-vm/src/de/fhac/ti/antlr/YAGI_New.g:70:30: ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' )*
             loop2:
             do {
                 int alt2=2;
@@ -159,7 +180,7 @@ public class YAGI_NewLexer extends Lexer {
 
                 switch (alt2) {
             	case 1 :
-            	    // /home/thens/yagi/yagi-modified/src/de/fhac/ti/antlr/YAGI_New.g:
+            	    // /home/thens/yagi/yagi-vm/src/de/fhac/ti/antlr/YAGI_New.g:
             	    {
             	    if ( (input.LA(1)>='0' && input.LA(1)<='9')||(input.LA(1)>='A' && input.LA(1)<='Z')||input.LA(1)=='_'||(input.LA(1)>='a' && input.LA(1)<='z') ) {
             	        input.consume();
@@ -195,10 +216,10 @@ public class YAGI_NewLexer extends Lexer {
         try {
             int _type = INT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/thens/yagi/yagi-modified/src/de/fhac/ti/antlr/YAGI_New.g:72:4: ( ( '0' .. '9' )+ )
-            // /home/thens/yagi/yagi-modified/src/de/fhac/ti/antlr/YAGI_New.g:72:7: ( '0' .. '9' )+
+            // /home/thens/yagi/yagi-vm/src/de/fhac/ti/antlr/YAGI_New.g:72:4: ( ( '0' .. '9' )+ )
+            // /home/thens/yagi/yagi-vm/src/de/fhac/ti/antlr/YAGI_New.g:72:7: ( '0' .. '9' )+
             {
-            // /home/thens/yagi/yagi-modified/src/de/fhac/ti/antlr/YAGI_New.g:72:7: ( '0' .. '9' )+
+            // /home/thens/yagi/yagi-vm/src/de/fhac/ti/antlr/YAGI_New.g:72:7: ( '0' .. '9' )+
             int cnt3=0;
             loop3:
             do {
@@ -212,7 +233,7 @@ public class YAGI_NewLexer extends Lexer {
 
                 switch (alt3) {
             	case 1 :
-            	    // /home/thens/yagi/yagi-modified/src/de/fhac/ti/antlr/YAGI_New.g:72:7: '0' .. '9'
+            	    // /home/thens/yagi/yagi-vm/src/de/fhac/ti/antlr/YAGI_New.g:72:7: '0' .. '9'
             	    {
             	    matchRange('0','9'); 
 
@@ -244,11 +265,11 @@ public class YAGI_NewLexer extends Lexer {
         try {
             int _type = STRING;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/thens/yagi/yagi-modified/src/de/fhac/ti/antlr/YAGI_New.g:74:7: ( '\"' (~ ( '\\\\' | '\"' ) )* '\"' )
-            // /home/thens/yagi/yagi-modified/src/de/fhac/ti/antlr/YAGI_New.g:74:10: '\"' (~ ( '\\\\' | '\"' ) )* '\"'
+            // /home/thens/yagi/yagi-vm/src/de/fhac/ti/antlr/YAGI_New.g:74:7: ( '\"' (~ ( '\\\\' | '\"' ) )* '\"' )
+            // /home/thens/yagi/yagi-vm/src/de/fhac/ti/antlr/YAGI_New.g:74:10: '\"' (~ ( '\\\\' | '\"' ) )* '\"'
             {
             match('\"'); 
-            // /home/thens/yagi/yagi-modified/src/de/fhac/ti/antlr/YAGI_New.g:74:14: (~ ( '\\\\' | '\"' ) )*
+            // /home/thens/yagi/yagi-vm/src/de/fhac/ti/antlr/YAGI_New.g:74:14: (~ ( '\\\\' | '\"' ) )*
             loop4:
             do {
                 int alt4=2;
@@ -261,7 +282,7 @@ public class YAGI_NewLexer extends Lexer {
 
                 switch (alt4) {
             	case 1 :
-            	    // /home/thens/yagi/yagi-modified/src/de/fhac/ti/antlr/YAGI_New.g:74:16: ~ ( '\\\\' | '\"' )
+            	    // /home/thens/yagi/yagi-vm/src/de/fhac/ti/antlr/YAGI_New.g:74:16: ~ ( '\\\\' | '\"' )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -298,7 +319,7 @@ public class YAGI_NewLexer extends Lexer {
         try {
             int _type = COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/thens/yagi/yagi-modified/src/de/fhac/ti/antlr/YAGI_New.g:76:8: ( '//' (~ ( '\\n' | '\\r' ) )* ( '\\r' )? '\\n' | '/*' ( options {greedy=false; } : . )* '*/' )
+            // /home/thens/yagi/yagi-vm/src/de/fhac/ti/antlr/YAGI_New.g:76:8: ( '//' (~ ( '\\n' | '\\r' ) )* ( '\\r' )? '\\n' | '/*' ( options {greedy=false; } : . )* '*/' )
             int alt8=2;
             int LA8_0 = input.LA(1);
 
@@ -326,11 +347,11 @@ public class YAGI_NewLexer extends Lexer {
             }
             switch (alt8) {
                 case 1 :
-                    // /home/thens/yagi/yagi-modified/src/de/fhac/ti/antlr/YAGI_New.g:76:11: '//' (~ ( '\\n' | '\\r' ) )* ( '\\r' )? '\\n'
+                    // /home/thens/yagi/yagi-vm/src/de/fhac/ti/antlr/YAGI_New.g:76:11: '//' (~ ( '\\n' | '\\r' ) )* ( '\\r' )? '\\n'
                     {
                     match("//"); 
 
-                    // /home/thens/yagi/yagi-modified/src/de/fhac/ti/antlr/YAGI_New.g:76:16: (~ ( '\\n' | '\\r' ) )*
+                    // /home/thens/yagi/yagi-vm/src/de/fhac/ti/antlr/YAGI_New.g:76:16: (~ ( '\\n' | '\\r' ) )*
                     loop5:
                     do {
                         int alt5=2;
@@ -343,7 +364,7 @@ public class YAGI_NewLexer extends Lexer {
 
                         switch (alt5) {
                     	case 1 :
-                    	    // /home/thens/yagi/yagi-modified/src/de/fhac/ti/antlr/YAGI_New.g:76:16: ~ ( '\\n' | '\\r' )
+                    	    // /home/thens/yagi/yagi-vm/src/de/fhac/ti/antlr/YAGI_New.g:76:16: ~ ( '\\n' | '\\r' )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -363,7 +384,7 @@ public class YAGI_NewLexer extends Lexer {
                         }
                     } while (true);
 
-                    // /home/thens/yagi/yagi-modified/src/de/fhac/ti/antlr/YAGI_New.g:76:30: ( '\\r' )?
+                    // /home/thens/yagi/yagi-vm/src/de/fhac/ti/antlr/YAGI_New.g:76:30: ( '\\r' )?
                     int alt6=2;
                     int LA6_0 = input.LA(1);
 
@@ -372,7 +393,7 @@ public class YAGI_NewLexer extends Lexer {
                     }
                     switch (alt6) {
                         case 1 :
-                            // /home/thens/yagi/yagi-modified/src/de/fhac/ti/antlr/YAGI_New.g:76:30: '\\r'
+                            // /home/thens/yagi/yagi-vm/src/de/fhac/ti/antlr/YAGI_New.g:76:30: '\\r'
                             {
                             match('\r'); 
 
@@ -387,11 +408,11 @@ public class YAGI_NewLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // /home/thens/yagi/yagi-modified/src/de/fhac/ti/antlr/YAGI_New.g:78:7: '/*' ( options {greedy=false; } : . )* '*/'
+                    // /home/thens/yagi/yagi-vm/src/de/fhac/ti/antlr/YAGI_New.g:78:7: '/*' ( options {greedy=false; } : . )* '*/'
                     {
                     match("/*"); 
 
-                    // /home/thens/yagi/yagi-modified/src/de/fhac/ti/antlr/YAGI_New.g:78:12: ( options {greedy=false; } : . )*
+                    // /home/thens/yagi/yagi-vm/src/de/fhac/ti/antlr/YAGI_New.g:78:12: ( options {greedy=false; } : . )*
                     loop7:
                     do {
                         int alt7=2;
@@ -416,7 +437,7 @@ public class YAGI_NewLexer extends Lexer {
 
                         switch (alt7) {
                     	case 1 :
-                    	    // /home/thens/yagi/yagi-modified/src/de/fhac/ti/antlr/YAGI_New.g:78:40: .
+                    	    // /home/thens/yagi/yagi-vm/src/de/fhac/ti/antlr/YAGI_New.g:78:40: .
                     	    {
                     	    matchAny(); 
 
@@ -445,54 +466,61 @@ public class YAGI_NewLexer extends Lexer {
     // $ANTLR end "COMMENT"
 
     public void mTokens() throws RecognitionException {
-        // /home/thens/yagi/yagi-modified/src/de/fhac/ti/antlr/YAGI_New.g:1:8: ( T__9 | T__10 | WHITESPACE | ID | INT | STRING | COMMENT )
-        int alt9=7;
+        // /home/thens/yagi/yagi-vm/src/de/fhac/ti/antlr/YAGI_New.g:1:8: ( T__9 | T__10 | T__11 | WHITESPACE | ID | INT | STRING | COMMENT )
+        int alt9=8;
         alt9 = dfa9.predict(input);
         switch (alt9) {
             case 1 :
-                // /home/thens/yagi/yagi-modified/src/de/fhac/ti/antlr/YAGI_New.g:1:10: T__9
+                // /home/thens/yagi/yagi-vm/src/de/fhac/ti/antlr/YAGI_New.g:1:10: T__9
                 {
                 mT__9(); 
 
                 }
                 break;
             case 2 :
-                // /home/thens/yagi/yagi-modified/src/de/fhac/ti/antlr/YAGI_New.g:1:15: T__10
+                // /home/thens/yagi/yagi-vm/src/de/fhac/ti/antlr/YAGI_New.g:1:15: T__10
                 {
                 mT__10(); 
 
                 }
                 break;
             case 3 :
-                // /home/thens/yagi/yagi-modified/src/de/fhac/ti/antlr/YAGI_New.g:1:21: WHITESPACE
+                // /home/thens/yagi/yagi-vm/src/de/fhac/ti/antlr/YAGI_New.g:1:21: T__11
+                {
+                mT__11(); 
+
+                }
+                break;
+            case 4 :
+                // /home/thens/yagi/yagi-vm/src/de/fhac/ti/antlr/YAGI_New.g:1:27: WHITESPACE
                 {
                 mWHITESPACE(); 
 
                 }
                 break;
-            case 4 :
-                // /home/thens/yagi/yagi-modified/src/de/fhac/ti/antlr/YAGI_New.g:1:32: ID
+            case 5 :
+                // /home/thens/yagi/yagi-vm/src/de/fhac/ti/antlr/YAGI_New.g:1:38: ID
                 {
                 mID(); 
 
                 }
                 break;
-            case 5 :
-                // /home/thens/yagi/yagi-modified/src/de/fhac/ti/antlr/YAGI_New.g:1:35: INT
+            case 6 :
+                // /home/thens/yagi/yagi-vm/src/de/fhac/ti/antlr/YAGI_New.g:1:41: INT
                 {
                 mINT(); 
 
                 }
                 break;
-            case 6 :
-                // /home/thens/yagi/yagi-modified/src/de/fhac/ti/antlr/YAGI_New.g:1:39: STRING
+            case 7 :
+                // /home/thens/yagi/yagi-vm/src/de/fhac/ti/antlr/YAGI_New.g:1:45: STRING
                 {
                 mSTRING(); 
 
                 }
                 break;
-            case 7 :
-                // /home/thens/yagi/yagi-modified/src/de/fhac/ti/antlr/YAGI_New.g:1:46: COMMENT
+            case 8 :
+                // /home/thens/yagi/yagi-vm/src/de/fhac/ti/antlr/YAGI_New.g:1:52: COMMENT
                 {
                 mCOMMENT(); 
 
@@ -506,37 +534,38 @@ public class YAGI_NewLexer extends Lexer {
 
     protected DFA9 dfa9 = new DFA9(this);
     static final String DFA9_eotS =
-        "\1\uffff\1\3\5\uffff\5\3\1\16\1\3\1\uffff\1\20\1\uffff";
+        "\1\uffff\1\4\6\uffff\5\4\1\17\1\4\1\uffff\1\21\1\uffff";
     static final String DFA9_eofS =
-        "\21\uffff";
+        "\22\uffff";
     static final String DFA9_minS =
-        "\1\11\1\141\5\uffff\1\165\1\143\1\145\1\164\1\156\1\60\1\164\1\uffff"+
+        "\1\11\1\141\6\uffff\1\165\1\143\1\145\1\164\1\156\1\60\1\164\1\uffff"+
         "\1\60\1\uffff";
     static final String DFA9_maxS =
-        "\1\172\1\154\5\uffff\1\165\1\143\1\145\1\164\1\156\1\172\1\164\1"+
+        "\1\172\1\154\6\uffff\1\165\1\143\1\145\1\164\1\156\1\172\1\164\1"+
         "\uffff\1\172\1\uffff";
     static final String DFA9_acceptS =
-        "\2\uffff\1\3\1\4\1\5\1\6\1\7\7\uffff\1\2\1\uffff\1\1";
+        "\2\uffff\1\2\1\4\1\5\1\6\1\7\1\10\7\uffff\1\3\1\uffff\1\1";
     static final String DFA9_specialS =
-        "\21\uffff}>";
+        "\22\uffff}>";
     static final String[] DFA9_transitionS = {
-            "\2\2\1\uffff\2\2\22\uffff\1\2\1\uffff\1\5\14\uffff\1\6\12\4"+
-            "\7\uffff\32\3\4\uffff\1\3\1\uffff\5\3\1\1\24\3",
-            "\1\10\12\uffff\1\7",
+            "\2\3\1\uffff\2\3\22\uffff\1\3\1\uffff\1\6\14\uffff\1\7\12\5"+
+            "\1\uffff\1\2\5\uffff\32\4\4\uffff\1\4\1\uffff\5\4\1\1\24\4",
+            "\1\11\12\uffff\1\10",
             "",
             "",
             "",
             "",
             "",
-            "\1\11",
+            "",
             "\1\12",
             "\1\13",
             "\1\14",
             "\1\15",
-            "\12\3\7\uffff\32\3\4\uffff\1\3\1\uffff\32\3",
-            "\1\17",
+            "\1\16",
+            "\12\4\7\uffff\32\4\4\uffff\1\4\1\uffff\32\4",
+            "\1\20",
             "",
-            "\12\3\7\uffff\32\3\4\uffff\1\3\1\uffff\32\3",
+            "\12\4\7\uffff\32\4\4\uffff\1\4\1\uffff\32\4",
             ""
     };
 
@@ -570,7 +599,7 @@ public class YAGI_NewLexer extends Lexer {
             this.transition = DFA9_transition;
         }
         public String getDescription() {
-            return "1:1: Tokens : ( T__9 | T__10 | WHITESPACE | ID | INT | STRING | COMMENT );";
+            return "1:1: Tokens : ( T__9 | T__10 | T__11 | WHITESPACE | ID | INT | STRING | COMMENT );";
         }
     }
  
