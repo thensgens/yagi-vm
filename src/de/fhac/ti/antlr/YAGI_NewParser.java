@@ -1,4 +1,4 @@
-// $ANTLR 3.1.3 May 27, 2013 16:53:35 /home/thens/yagi/yagi-modified/src/de/fhac/ti/antlr/YAGI_New.g 2013-06-10 13:28:18
+// $ANTLR 3.1.3 May 27, 2013 16:53:35 /home/thens/yagi/yagi-modified/src/de/fhac/ti/antlr/YAGI_New.g 2013-06-10 13:45:38
 
   package de.fhac.ti.antlr;
   
@@ -52,7 +52,7 @@ public class YAGI_NewParser extends Parser {
     	HashSet<String> localvars,argvars;
     	Logger LOGGER;
     	
-     	public YAGI_NewParser(Map fluents, Map actions, TokenStream input, Logger LOGGER)
+     	public YAGI_NewParser(Map fluents, Map actions, TokenStream input, Logger LOGGER) 
      		throws Exception
      	{
             this(input, new RecognizerSharedState());

@@ -1,4 +1,4 @@
-// $ANTLR 3.1.3 May 27, 2013 16:53:35 /home/thens/yagi/yagi-modified/src/de/fhac/ti/antlr/YAGI_New.g 2013-06-10 13:28:18
+// $ANTLR 3.1.3 May 27, 2013 16:53:35 /home/thens/yagi/yagi-modified/src/de/fhac/ti/antlr/YAGI_New.g 2013-06-10 13:45:38
 package de.fhac.ti.antlr;
 
 import org.antlr.runtime.*;
