@@ -1,0 +1,2 @@
+fluent currFloor;
+fluent on;
