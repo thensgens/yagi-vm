@@ -57,7 +57,11 @@ line:  	 declaration
        	     }
        	 } 
        	 |
-       	 list { mInstance.output($list.output); } ;
+       	 list { 
+       	     if ($list.output != null) {
+       	         mInstance.output($list.output);
+       	     }
+       	 } ;
 
 declaration:    fluent_decl
         |   
