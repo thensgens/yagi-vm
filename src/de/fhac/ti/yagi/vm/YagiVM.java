@@ -20,6 +20,7 @@ public class YagiVM {
     private final static Logger LOGGER = Logger.getLogger(YagiVM.class.getName());
 
     private InputStream mInputStream = System.in;
+    private OutputStream mOutputStream = System.out;
     private boolean mInteractiveMode = true;
     private MemoryManagement mMemory;
 
@@ -30,17 +31,37 @@ public class YagiVM {
         /* initialize the vm's memory model */
         mMemory = new MemoryManagement();
         /* initialize further relevant context for the vm */
+        // ...
     }
 
     /**
      * Constructor which accepts an input stream (for reading and parsing of yagi code).
-     * T
-     * @param input The Yagi vm instance will read its input from the specified input stream.
+     * @param input The Yagi vm will read its input from the specified input stream.
      */
     public YagiVM(InputStream input) {
         super();
         mInputStream = input;
         mInteractiveMode = false;
+    }
+
+    /**
+     * Constructor which accepts an output stream.
+     * @param output The Yagi vm will output all messages/notifications to this output stream.
+     */
+    public YagiVM(OutputStream output) {
+        super();
+        mOutputStream = output;
+    }
+
+    /**
+     * Constructor which accepts an input and output stream. (see 1-parameter constructors)
+     * @param input The Yagi vm will read its input from the specified input stream.
+     * @param output The Yagi vm will output all messages/notifications to this output stream.
+     */
+    public YagiVM(InputStream input, OutputStream output) {
+        super();
+        mInputStream = input;
+        mOutputStream = output;
     }
 
     /**
@@ -82,26 +103,42 @@ public class YagiVM {
             YAGI_GrammarLexer lexer = new YAGI_GrammarLexer(stream);
             TokenStream tokenStream = new CommonTokenStream(lexer);
 
-            YAGI_GrammarParser parser = new YAGI_GrammarParser(tokenStream, LOGGER);
+            YAGI_GrammarParser parser = new YAGI_GrammarParser(this, tokenStream);
             parser.line();
             System.out.println();
         }
     }
 
     /**
-     * This method will stop the VM after all resources are freed (and maybe callbacks etc.)
-     * @return mExitCode The
+     * This method will stop the VM after all resources are freed (and callbacks etc.)
+     * @return mExitCode The actual exit code (e.g. "OK", "FAILURE", ...)
      */
     public ExitCode stop() {
         try {
             mInputStream.close();
+            mOutputStream.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
         return ExitCode.OK;
     }
 
-	public static void main(String[] args) {
+    public MemoryManagement getMemoryModel() {
+        return mMemory;
+    }
+
+    public void output(String message) {
+        try {
+            mOutputStream.write(message.getBytes());
+            mOutputStream.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /* Main method for testing purposes... */
+
+    public static void main(String[] args) {
         YagiVM instance = null;
         try {
             //instance = new YagiVM(new FileInputStream(new File
@@ -123,5 +160,14 @@ public class YagiVM {
             /* for now, no error handling yet */
             e.printStackTrace();
         }
+    }
+
+    /**
+     * This enum represents all possible exit codes of the yagi virtual machine.
+     */
+    public static enum ExitCode {
+        OK,
+        FAILURE,
+        INTERNAL_FAILURE
     }
 }
