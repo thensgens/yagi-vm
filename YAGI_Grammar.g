@@ -104,8 +104,24 @@ assign	:	term '=' setexpr {
 	    }
 	}
 	}
-	| 	term '+=' setexpr
-	| 	term '-=' setexpr
+	| 	term '+=' setexpr {
+	    AbstractGlobalModel model = mMemory.getTerm($term.id);
+    	    // this operation is only permitted if the set types are compatible
+    	    if (model.getSetType() == $setexpr.setType) {
+    	        model.addAll($setexpr.elems);   
+    	    } else {
+    	        mInstance.output("Types are incompatible. Operation omitted.");
+    	    }
+	}
+	| 	term '-=' setexpr {
+	    AbstractGlobalModel model = mMemory.getTerm($term.id);
+    	    // this operation is only permitted if the set types are compatible
+    	    if (model.getSetType() == $setexpr.setType) {
+    	        model.removeAll($setexpr.elems);   
+    	    } else {
+    	        mInstance.output("Types are incompatible. Operation omitted.");
+    	    }
+	}
 	| 	var  '=' valexpr
 	| 	var '+=' valexpr ;
 

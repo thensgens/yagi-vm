@@ -11,7 +11,7 @@ public abstract class AbstractGlobalModel {
 
     protected String mName;
     protected MemoryManagement.TermType mTermType;
-    /* this should've probably been refactored to generics, like Fluent<T>... */
+    /* this should've probably been refactored to generics, like Fluent<T>, but well... */
     protected SetType mSetType;
     protected Set<SetItem> mValues;
 
@@ -50,6 +50,10 @@ public abstract class AbstractGlobalModel {
 
     public void addAll(List<SetItem> elems) {
         mValues.addAll(elems);
+    }
+
+    public void removeAll(List<SetItem> items) {
+        mValues.removeAll(items);
     }
 
     public Set<SetItem> getValues() {

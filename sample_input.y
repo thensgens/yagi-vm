@@ -1,8 +1,7 @@
 fluent on;
 on = {1, 2, 3}
 on
-fluent off;
-off = {1}
-off
-off = {42,23}
-off
+on += {4,5,6}
+on
+on -= {4,5,1,3,1,2}
+on
