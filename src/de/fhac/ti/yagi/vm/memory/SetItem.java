@@ -1,22 +1,21 @@
 package de.fhac.ti.yagi.vm.memory;
 
-import de.fhac.ti.yagi.vm.memory.models.AbstractModel;
-
 public class SetItem {
 
-    private AbstractModel.SetType mType;
+    // this value holds a value "generically".. it's represented as a string here, but its value can either
+    // be an integer (INT), a string (STRING) or a variable (VAR)
     private String mValue;
 
-    public SetItem(AbstractModel.SetType type, String value) {
-        mType = type;
+    public SetItem(String value) {
         mValue = value;
     }
 
-    public AbstractModel.SetType getType() {
-        return mType;
+    public String getValue() {
+        return mValue;
     }
 
-    public String getValue() {
+    @Override
+    public String toString() {
         return mValue;
     }
 }

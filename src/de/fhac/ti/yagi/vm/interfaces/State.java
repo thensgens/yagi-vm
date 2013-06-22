@@ -2,7 +2,7 @@ package de.fhac.ti.yagi.vm.interfaces;
 
 import de.fhac.ti.yagi.vm.exceptions.InvalidModelException;
 import de.fhac.ti.yagi.vm.exceptions.ModelNotFoundException;
-import de.fhac.ti.yagi.vm.memory.models.AbstractModel;
+import de.fhac.ti.yagi.vm.memory.models.AbstractGlobalModel;
 
 public interface State {
 
@@ -11,7 +11,7 @@ public interface State {
      * @param model
      * @throws InvalidModelException
      */
-    public void add(AbstractModel model) throws InvalidModelException;
+    public void add(AbstractGlobalModel model) throws InvalidModelException;
 
     /**
      * The remove method will remove the specified model from the state if it's present in the state.
@@ -19,7 +19,7 @@ public interface State {
      * @param model
      * @throws InvalidModelException
      */
-    public void remove(AbstractModel model) throws InvalidModelException;
+    public void remove(AbstractGlobalModel model) throws InvalidModelException;
 
     /**
      * This method will return the mapped model, specified by the parameter (ID).
@@ -29,7 +29,7 @@ public interface State {
      * @return The mapped Model (if present).
      * @throws ModelNotFoundException
      */
-    public AbstractModel get(String identifier) throws ModelNotFoundException;
+    public AbstractGlobalModel get(String identifier) throws ModelNotFoundException;
 
     /**
      * This method checks if the term (specified by its id) is present in the current state.

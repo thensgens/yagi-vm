@@ -19,12 +19,11 @@ options {
     import de.fhac.ti.yagi.vm.YagiVM;
     import de.fhac.ti.yagi.vm.memory.MemoryManagement;
     import de.fhac.ti.yagi.vm.memory.MemoryManagement.TermType;    
-    import de.fhac.ti.yagi.vm.memory.models.AbstractModel.SetType;
-    import de.fhac.ti.yagi.vm.memory.SetItem;
+    import de.fhac.ti.yagi.vm.memory.models.AbstractGlobalModel.SetType;
     import de.fhac.ti.yagi.vm.memory.models.Fluent;
     import de.fhac.ti.yagi.vm.memory.models.Fact;
     import de.fhac.ti.yagi.vm.memory.SetItem;    
-    import de.fhac.ti.yagi.vm.memory.models.AbstractModel;
+    import de.fhac.ti.yagi.vm.memory.models.AbstractGlobalModel;
     import de.fhac.ti.yagi.vm.exceptions.InvalidModelException;
     import de.fhac.ti.yagi.vm.exceptions.TermAlreadyDeclaredException;
 }
@@ -48,6 +47,14 @@ options {
 // PARSER RULES
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+
+declaration:    fluent_decl
+        |   
+        fact_decl 
+        |
+        action_decl
+        |
+        assignment ;
 line:  	 declaration
        	 |
        	 block
@@ -56,7 +63,14 @@ line:  	 declaration
        	 term {
        	     if ($term.exists) {
        	         /* output the term's values here... */
-       	         // ...    
+       	         AbstractGlobalModel model = mMemory.getTerm($term.id);
+       	         SetType setType = model.getSetType();
+		 Set<SetItem> values = model.getValues();
+		 for (SetItem item : values) {
+            	     // no need type related conversions here.. just output the
+	             // values's string representation
+		     mInstance.output(item.toString());
+		 }
        	     } else {
 	       	 mInstance.output("Term " + $term.id + " is not defined yet.");
        	     }
@@ -68,13 +82,6 @@ line:  	 declaration
        	     }
        	 } ;
 
-declaration:    fluent_decl
-        |   
-        fact_decl 
-        |
-        action_decl
-        |
-        assignment ;
         
 block:      ;
 
@@ -84,7 +91,9 @@ assignment:	assign ;
 
 assign	:	term '=' setexpr {
 	if ($term.exists && $setexpr.valid) {
-	    AbstractModel model = mMemory.getTerm($term.id);
+	    AbstractGlobalModel model = mMemory.getTerm($term.id);
+	    model.clear();
+	    model.setSetType($setexpr.setType);
 	    model.addAll($setexpr.elems);
 	} else {
 	    mInstance.output("Error during assignment. ");
@@ -127,22 +136,24 @@ list_term returns [String output] :
 	// ...
 
 // simplified expression for now (also allowed: {1} + {2,3} ...)
-setexpr returns [List<SetItem> elems, boolean valid, String error] :
+setexpr returns [List<SetItem> elems, SetType setType, boolean valid, String error] :
 	set { $valid = $set.valid;
 	      $error = $set.error;
-	      $elems = $set.elems;} ;
+	      $elems = $set.elems;
+	      $setType = $set.setType;} ;
 
-set returns [List<SetItem> elems, boolean valid, String error] :
+set returns [List<SetItem> elems, SetType setType, boolean valid, String error] :
 	'{' a=value {
 	    $elems = new ArrayList<SetItem>();
-	    SetItem item = new SetItem($a.type, $a.v);
+	    SetItem item = new SetItem($a.v);
 	    $elems.add(item);
+	    $setType = $a.type;
 	    $valid = true;
 	}
-	(',' b=value)* '}' {
-	    SetItem item = new SetItem($b.type, $b.v);
+	(',' b=value {
+	    SetItem item = new SetItem($b.v);
 	    $elems.add(item);
-	}
+	} )* '}'
 	|	term {
 	    $valid = $term.exists;
 	    if (!$valid) {

@@ -16,7 +16,7 @@ import java.util.logging.Logger;
  */
 public class YagiVM {
 
-    private static final String DEFAULT_INPUT_FILE = "/home/thens/yagi/yagi-vm/src/de/fhac/ti/yagi/sample_input.y";
+    private static final String DEFAULT_INPUT_FILE = "/home/thens/yagi/yagi-vm/sample_input.y";
     private final static Logger LOGGER = Logger.getLogger(YagiVM.class.getName());
 
     private InputStream mInputStream = System.in;
@@ -39,7 +39,7 @@ public class YagiVM {
      * @param input The Yagi vm will read its input from the specified input stream.
      */
     public YagiVM(InputStream input) {
-        super();
+        this();
         mInputStream = input;
         mInteractiveMode = false;
     }
@@ -49,7 +49,7 @@ public class YagiVM {
      * @param output The Yagi vm will output all messages/notifications to this output stream.
      */
     public YagiVM(OutputStream output) {
-        super();
+        this();
         mOutputStream = output;
     }
 
@@ -59,7 +59,7 @@ public class YagiVM {
      * @param output The Yagi vm will output all messages/notifications to this output stream.
      */
     public YagiVM(InputStream input, OutputStream output) {
-        super();
+        this();
         mInputStream = input;
         mOutputStream = output;
     }
@@ -129,21 +129,22 @@ public class YagiVM {
 
     public void output(String message) {
         try {
-            mOutputStream.write(message.getBytes());
-            mOutputStream.flush();
+            if (message != null) {
+                mOutputStream.write(message.getBytes());
+                mOutputStream.flush();
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
     /* Main method for testing purposes... */
-
     public static void main(String[] args) {
         YagiVM instance = null;
         try {
-            //instance = new YagiVM(new FileInputStream(new File
-                   // (DEFAULT_INPUT_FILE)));
-            instance = new YagiVM();
+            instance = new YagiVM(new FileInputStream(new File
+                    (DEFAULT_INPUT_FILE)));
+            //instance = new YagiVM();
             instance.start();
             ExitCode exitCode = instance.stop();
             if (exitCode == ExitCode.OK) {

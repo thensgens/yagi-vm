@@ -4,7 +4,7 @@ import de.fhac.ti.yagi.vm.exceptions.InvalidModelException;
 import de.fhac.ti.yagi.vm.exceptions.ModelNotFoundException;
 import de.fhac.ti.yagi.vm.exceptions.TermAlreadyDeclaredException;
 import de.fhac.ti.yagi.vm.interfaces.State;
-import de.fhac.ti.yagi.vm.memory.models.AbstractModel;
+import de.fhac.ti.yagi.vm.memory.models.AbstractGlobalModel;
 
 /**
  * This class holds all relevant information about the VM's current context (declarations, states, ...)
@@ -46,8 +46,8 @@ public class MemoryManagement {
      * @param termID The term identifier
      * @return The term if present; null otherwise.
      */
-    public AbstractModel getTerm(String termID) {
-        AbstractModel term = null;
+    public AbstractGlobalModel getTerm(String termID) {
+        AbstractGlobalModel term = null;
         try {
             // ugly hack here... try & error on all possible states until one is found
             term = mFluentState.get(termID);
@@ -86,7 +86,7 @@ public class MemoryManagement {
     /* Unfortunately not DRY at the moment, needs refactoring...              */
     /* --------------------------------------------------------------------  */
 
-    public void addFluent(AbstractModel fluent) throws InvalidModelException, TermAlreadyDeclaredException {
+    public void addFluent(AbstractGlobalModel fluent) throws InvalidModelException, TermAlreadyDeclaredException {
         if (!containsTerm(fluent.getName())) {
             mFluentState.add(fluent);
         } else {
@@ -94,7 +94,7 @@ public class MemoryManagement {
         }
     }
 
-    public void addFact(AbstractModel fact) throws InvalidModelException, TermAlreadyDeclaredException {
+    public void addFact(AbstractGlobalModel fact) throws InvalidModelException, TermAlreadyDeclaredException {
         if (!containsTerm(fact.getName())) {
             mFactState.add(fact);
         } else {
