@@ -2,6 +2,7 @@ package de.fhac.ti.yagi.vm.memory.models;
 
 import de.fhac.ti.yagi.vm.memory.MemoryManagement;
 import de.fhac.ti.yagi.vm.memory.SetItem;
+import de.fhac.ti.yagi.vm.memory.SetType;
 
 import java.util.HashSet;
 import java.util.List;
@@ -64,9 +65,4 @@ public abstract class AbstractGlobalModel {
         mValues.clear();
     }
 
-    public static enum SetType {
-        INT,
-        STRING,
-        VAR
-    }
 }

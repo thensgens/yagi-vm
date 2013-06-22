@@ -19,7 +19,7 @@ options {
     import de.fhac.ti.yagi.vm.YagiVM;
     import de.fhac.ti.yagi.vm.memory.MemoryManagement;
     import de.fhac.ti.yagi.vm.memory.MemoryManagement.TermType;    
-    import de.fhac.ti.yagi.vm.memory.models.AbstractGlobalModel.SetType;
+    import de.fhac.ti.yagi.vm.memory.SetType;
     import de.fhac.ti.yagi.vm.memory.models.Fluent;
     import de.fhac.ti.yagi.vm.memory.models.Fact;
     import de.fhac.ti.yagi.vm.memory.SetItem;    
@@ -42,19 +42,11 @@ options {
 }
 
 
-
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // PARSER RULES
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-declaration:    fluent_decl
-        |   
-        fact_decl 
-        |
-        action_decl
-        |
-        assignment ;
 line:  	 declaration
        	 |
        	 block
@@ -82,21 +74,45 @@ line:  	 declaration
        	     }
        	 } ;
 
+declaration
+	:    	fluent_decl
+        |   	fact_decl
+        |	action_decl
+        |	assignment ;
         
-block:      ;
+block
+	:	s=statement {
+		}
+	|	(s=statement {
+		} )* ;
+
+statement
+	:	action_exec {
+		    // pretty much execute (and everything that's necessary) the action
+		    // ...
+		}
+	| 	pick
+	| 	choose ;
+	
+action_exec
+	:	;
+	
+pick	:	;
+
+choose	:	;
 
 action_decl:    ;
 
 assignment:	assign ;   
 
-assign	:	term '=' setexpr {
+assign	:	term '=' setexpr ';' {
 	if ($term.exists && $setexpr.valid) {
 	    AbstractGlobalModel model = mMemory.getTerm($term.id);
 	    model.clear();
 	    model.setSetType($setexpr.setType);
 	    model.addAll($setexpr.elems);
 	} else {
-	    mInstance.output("Error during assignment. ");
+	    mInstance.output("Error during assignment: ");
 	    if (!$term.exists) {
 	        mInstance.output($term.error);
 	    } else if (!$setexpr.valid) {
@@ -104,7 +120,7 @@ assign	:	term '=' setexpr {
 	    }
 	}
 	}
-	| 	term '+=' setexpr {
+	| 	term '+=' setexpr ';' {
 	    AbstractGlobalModel model = mMemory.getTerm($term.id);
     	    // this operation is only permitted if the set types are compatible
     	    if (model.getSetType() == $setexpr.setType) {
@@ -113,7 +129,7 @@ assign	:	term '=' setexpr {
     	        mInstance.output("Types are incompatible. Operation omitted.");
     	    }
 	}
-	| 	term '-=' setexpr {
+	| 	term '-=' setexpr ';' {
 	    AbstractGlobalModel model = mMemory.getTerm($term.id);
     	    // this operation is only permitted if the set types are compatible
     	    if (model.getSetType() == $setexpr.setType) {
@@ -122,8 +138,14 @@ assign	:	term '=' setexpr {
     	        mInstance.output("Types are incompatible. Operation omitted.");
     	    }
 	}
-	| 	var  '=' valexpr
-	| 	var '+=' valexpr ;
+	
+	/* the following rules are not used as assignments (like in the
+	   "original" YAGI grammar.
+	*/
+	| 	var '=' valexpr {      
+	}
+	| 	var '+=' valexpr
+	|	var '-=' valexpr ;
 
 term returns [boolean exists, String output, String error, String id]
 	:	ID {
@@ -170,9 +192,16 @@ set returns [List<SetItem> elems, SetType setType, boolean valid, String error] 
 	    SetItem item = new SetItem($b.v);
 	    $elems.add(item);
 	} )* '}'
-	|	term {
-	    $valid = $term.exists;
-	    if (!$valid) {
+	|	t=term {
+	    $valid = $t.exists;
+	    if ($valid) {
+	        AbstractGlobalModel term = mMemory.getTerm($t.id);
+	        $elems = new ArrayList<SetItem>();
+	        for (SetItem item : term.getValues()) {
+	            $elems.add(item);
+	        }
+	        $setType = term.getSetType();
+	    } else {
 	        $error = $term.error;
 	    }
 	} ;
@@ -183,14 +212,23 @@ value returns [SetType type, String v]
 	|	STRING  {$v = $STRING.text;
 			 $type = SetType.STRING;}
 	|	var     {$v = $var.id;
-			 $type = SetType.VAR;} ;
+			 $type = $var.setType;} ;
 
-var returns [String id]
+var returns [String id, SetType setType]
 	:	'$' ID {
-	    $id = "FooBar" + $ID.text;
+	    $id = $ID.text;
+	    $setType = SetType.UNDEFINED;
 	} ;
 
-valexpr	:	value (('+'|'-') value)* ;
+valexpr	returns [String v, SetType setType]
+	:		
+	/* only simple value expressions for now...
+	    value (('+'|'-') value)* ;
+	*/
+	value {
+	    $v = $value.v;
+	    $setType = $value.type;
+	} ;
 
 fluent_decl: 	'fluent' ID ';' { 
 	Fluent fluent = new Fluent($ID.text, TermType.FLUENT);

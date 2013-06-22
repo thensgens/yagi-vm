@@ -61,11 +61,13 @@ public class FluentState implements State {
     public String listState() {
         StringBuilder strBuilder = new StringBuilder();
         for (Map.Entry<String, Fluent> entry : mFluents.entrySet()) {
-            strBuilder.append(entry.getKey()).append("  //  ");
+            strBuilder.append(entry.getKey()).append(":  ");
+            for (SetItem item : entry.getValue().getValues()) {
+                strBuilder.append(item.getValue()).append(" / ");
+            }
+            strBuilder.delete(strBuilder.length() - 3, strBuilder.length()).append("\n");
         }
-        if (strBuilder.length() > 0) {
-            strBuilder.delete(strBuilder.length() - 6, strBuilder.length()).toString();
-        } else {
+        if (strBuilder.length() == 0) {
             strBuilder = new StringBuilder("There are no fluents declared yet.");
         }
 

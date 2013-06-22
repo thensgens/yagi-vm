@@ -37,7 +37,6 @@ public class MemoryManagement {
      */
     public boolean containsTerm(String termID) {
         // don't forget to add other terms as well later on, e.g. actions, procs, ...
-        // for now it can either be a fluent or a fact
         return mFluentState.contains(termID) || mFactState.contains(termID);
     }
 
@@ -77,7 +76,6 @@ public class MemoryManagement {
         } else if (type.equals(TermType.FACT)) {
             termRepresentation = mFactState.listState();
         }
-
         return termRepresentation;
     }
 
