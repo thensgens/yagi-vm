@@ -2,6 +2,7 @@ yagi-vm
 =======
 
 Basic virtual machine implementation for the YAGI language specification.
+(See https://code.google.com/p/yagi/ for more information)
 
 How-To Dev Hints
 =======
