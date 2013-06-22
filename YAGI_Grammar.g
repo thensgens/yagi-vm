@@ -19,8 +19,12 @@ options {
     import de.fhac.ti.yagi.vm.YagiVM;
     import de.fhac.ti.yagi.vm.memory.MemoryManagement;
     import de.fhac.ti.yagi.vm.memory.MemoryManagement.TermType;    
+    import de.fhac.ti.yagi.vm.memory.models.AbstractModel.SetType;
+    import de.fhac.ti.yagi.vm.memory.SetItem;
     import de.fhac.ti.yagi.vm.memory.models.Fluent;
     import de.fhac.ti.yagi.vm.memory.models.Fact;
+    import de.fhac.ti.yagi.vm.memory.SetItem;    
+    import de.fhac.ti.yagi.vm.memory.models.AbstractModel;
     import de.fhac.ti.yagi.vm.exceptions.InvalidModelException;
     import de.fhac.ti.yagi.vm.exceptions.TermAlreadyDeclaredException;
 }
@@ -51,7 +55,8 @@ line:  	 declaration
        	 // this rule is basically used for outputting the term
        	 term {
        	     if ($term.exists) {
-       	         /* output the term's values here... */    
+       	         /* output the term's values here... */
+       	         // ...    
        	     } else {
 	       	 mInstance.output("Term " + $term.id + " is not defined yet.");
        	     }
@@ -79,9 +84,10 @@ assignment:	assign ;
 
 assign	:	term '=' setexpr {
 	if ($term.exists && $setexpr.valid) {
-	    
+	    AbstractModel model = mMemory.getTerm($term.id);
+	    model.addAll($setexpr.elems);
 	} else {
-	    mInstance.output("Error during assignment.");
+	    mInstance.output("Error during assignment. ");
 	    if (!$term.exists) {
 	        mInstance.output($term.error);
 	    } else if (!$setexpr.valid) {
@@ -121,12 +127,22 @@ list_term returns [String output] :
 	// ...
 
 // simplified expression for now (also allowed: {1} + {2,3} ...)
-setexpr returns [boolean valid, String error] :
+setexpr returns [List<SetItem> elems, boolean valid, String error] :
 	set { $valid = $set.valid;
-	      $error = $set.error;} ;
+	      $error = $set.error;
+	      $elems = $set.elems;} ;
 
-set  returns [boolean valid, String error] :
-	'{' value (',' value)* '}'
+set returns [List<SetItem> elems, boolean valid, String error] :
+	'{' a=value {
+	    $elems = new ArrayList<SetItem>();
+	    SetItem item = new SetItem($a.type, $a.v);
+	    $elems.add(item);
+	    $valid = true;
+	}
+	(',' b=value)* '}' {
+	    SetItem item = new SetItem($b.type, $b.v);
+	    $elems.add(item);
+	}
 	|	term {
 	    $valid = $term.exists;
 	    if (!$valid) {
@@ -134,11 +150,18 @@ set  returns [boolean valid, String error] :
 	    }
 	} ;
 
-value	:	INT
-	|	STRING
-	|	var ;
+value returns [SetType type, String v]
+	:	INT	{$v = $INT.text;
+			 $type = SetType.INT;}
+	|	STRING  {$v = $STRING.text;
+			 $type = SetType.STRING;}
+	|	var     {$v = $var.id;
+			 $type = SetType.VAR;} ;
 
-var	:	'$' ID ;
+var returns [String id]
+	:	'$' ID {
+	    $id = "FooBar" + $ID.text;
+	} ;
 
 valexpr	:	value (('+'|'-') value)* ;
 
