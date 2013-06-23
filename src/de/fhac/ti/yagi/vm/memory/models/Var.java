@@ -28,6 +28,14 @@ public class Var {
         return mSetType;
     }
 
+    public void setmValue(String mValue) {
+        this.mValue = mValue;
+    }
+
+    public void setmSetType(SetType mSetType) {
+        this.mSetType = mSetType;
+    }
+
     public boolean isValid() {
         return !mName.equals("") && mValue != null && isTyped();
     }

@@ -1,8 +1,6 @@
 package de.fhac.ti.yagi.vm.memory.models.action;
 
-import de.fhac.ti.yagi.vm.exceptions.ArgumentCountMismatchException;
-import de.fhac.ti.yagi.vm.exceptions.VarAlreadyInScopeException;
-import de.fhac.ti.yagi.vm.exceptions.VarNotInScopeException;
+import de.fhac.ti.yagi.vm.exceptions.*;
 import de.fhac.ti.yagi.vm.memory.models.AbstractComplexModel;
 import de.fhac.ti.yagi.vm.memory.models.Var;
 
@@ -27,9 +25,9 @@ public class Action extends AbstractComplexModel {
      * the set types are compatible.
      * @param arguments The passed arguments (action_exec)
      * @throws ArgumentCountMismatchException Argument count is not equal to the parameter count. Mismatch.
-     * @throws Exception This exception will occur if one of the passed arguments is not valid.
+     * @throws ArgumentNotValidException This exception will occur if one of the passed arguments is not valid.
      */
-    public void updateScope(List<Var> arguments) throws ArgumentCountMismatchException, Exception {
+    public void updateScope(List<Var> arguments) throws ArgumentCountMismatchException, ArgumentNotValidException {
         if (mScope.size() != arguments.size()) {
             throw new ArgumentCountMismatchException("The argument's count mismatched.");
         }
@@ -39,23 +37,18 @@ public class Action extends AbstractComplexModel {
         for (Var var : mScope.values()) {
             Var argumentVar = arguments.get(index++);
             if (!argumentVar.isValid()) {
-                throw new Exception("Passed argument is not valid.");
+                throw new ArgumentNotValidException("Passed argument is not valid.");
             }
             newScope.put(var.getName(), argumentVar);
         }
         mScope = newScope;
-        mFormula.updateScope(mScope);
+        if (isInitialized()) {
+            mFormula.updateScope(mScope);
+        }
     }
 
-    public void updateScope(Var localVar) throws VarAlreadyInScopeException, Exception {
-        if (mScope.containsKey(localVar.getName())) {
-            throw new VarAlreadyInScopeException("There's already a variable with id [" + localVar.getName()
-                + "] defined.");
-        }
-        if (!localVar.isValid()) {
-            throw new Exception("Passed argument is not valid.");
-        }
-        mScope.put(localVar.getName(), localVar);
+    private boolean isInitialized() {
+        return mFormula != null;
     }
 
     public void setFormula(Formula formula) {
@@ -77,7 +70,7 @@ public class Action extends AbstractComplexModel {
 
     public void execute() {
         try {
-            if (mFormula.evaluate()) {
+            if (isInitialized() && mFormula.evaluate()) {
                 System.out.println("Precondition is true.");
                 mAssign.execute();
             } else {
@@ -85,8 +78,8 @@ public class Action extends AbstractComplexModel {
             }
         } catch (VarNotInScopeException e) {
             System.out.println("Error during the exection of action [" + mName + "]:\n" + e.getMessage());
-        } catch (Exception e) {
-            System.out.println("Unknown error occured. Very bad indeed.");
+        } catch (IncompatibleOperationException e) {
+            System.out.println(e.getMessage());
         }
     }
 }

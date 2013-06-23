@@ -26,6 +26,8 @@ public class Atom implements ConditionObject {
 
     private CompOperator mCompOp;
 
+    private boolean mStaticExpression;
+
     private Map<String, Var> mScope;
 
     public Atom(AtomRule rule, Map<String, Var> scope) {
@@ -36,17 +38,18 @@ public class Atom implements ConditionObject {
     @Override
     public boolean evaluate() throws IncompatibleOperationException, VarNotInScopeException {
         boolean result = false;
+
         if (mRuleNumber == AtomRule.FIRST) {
             if (mFirstVar.getSetType() != mSecondVar.getSetType()) {
                 throw new IncompatibleOperationException("Types are incompatible.");
             }
+            // INT comp
             if (mFirstVar.getSetType() == SetType.INT) {
                 int first = Integer.parseInt(mFirstVar.getmValue());
                 int second = Integer.parseInt(mSecondVar.getmValue());
                 result = evaluateInt(first,  second);
             }
-            // STRING operation not supported yet
-            // ...
+            // STRING comp not supported yet
 
             // lookup in the current scope required
             else if (mFirstVar.getSetType() == SetType.UNDEFINED) {
@@ -61,7 +64,7 @@ public class Atom implements ConditionObject {
                         int f2 = Integer.parseInt(second.getmValue());
                         result = evaluateInt(f1, f2);
                     }
-                    // STRING not supported
+                    // STRING comp not supported yet
                 } else {
                     throw new VarNotInScopeException("Var [" + mFirstVar.getName() + "] or [" + mSecondVar.getName()
                     + "] is not defined in the current scope.");
@@ -69,8 +72,26 @@ public class Atom implements ConditionObject {
             }
         } else if (mRuleNumber == AtomRule.SECOND) {
         } else if (mRuleNumber == AtomRule.THIRD) {
+            if (mFirstVar.getSetType() != mFirstSetType) {
+                throw new IncompatibleOperationException("Types are incompatible.");
+            }
+
+            result = false;
+            // INT comp
+            if (mFirstVar.getSetType() == SetType.INT) {
+                for (SetItem item : mFirstSet) {
+                    int value = Integer.parseInt(mFirstVar.getmValue());
+                    int itemVal = Integer.parseInt(item.getValue());
+                    if (value == itemVal) {
+                        result = true;
+                        break;
+                    }
+                }
+            }
         } else if (mRuleNumber == AtomRule.FOURTH) {
+            result = mStaticExpression;
         } else if (mRuleNumber == AtomRule.FIFTH) {
+            result = mStaticExpression;
         }
         return result;
     }
@@ -119,8 +140,23 @@ public class Atom implements ConditionObject {
         mCompOp = compOp;
     }
 
+    public void setStaticExpression(boolean staticExpression) {
+        mStaticExpression = staticExpression;
+    }
+
     public void updateScope(Map<String, Var> scope) {
         mScope = scope;
+        for (Map.Entry<String, Var> entry : mScope.entrySet()) {
+            String key = entry.getKey();
+            Var value = entry.getValue();
+            if (mFirstVar.getName().equals(key)) {
+                mFirstVar.setmValue(value.getmValue());
+                mFirstVar.setmSetType(value.getSetType());
+            } else if (mSecondVar.getName().equals(key)) {
+                mSecondVar.setmValue(value.getmValue());
+                mSecondVar.setmSetType(value.getSetType());
+            }
+        }
     }
 
     public enum AtomRule {

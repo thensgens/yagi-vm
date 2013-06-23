@@ -1,4 +1,4 @@
-// $ANTLR 3.4 /home/thens/yagi/yagi-vm/YAGI_Grammar.g 2013-06-23 23:35:25
+// $ANTLR 3.4 /home/thens/yagi/yagi-vm/YAGI_Grammar.g 2013-06-24 11:07:46
 
   package de.fhac.ti.yagi.gen;
   
@@ -30,8 +30,8 @@
     import de.fhac.ti.yagi.vm.memory.models.AbstractSimpleModel;
     import de.fhac.ti.yagi.vm.exceptions.InvalidModelException;
     import de.fhac.ti.yagi.vm.exceptions.TermAlreadyDeclaredException;
-    import de.fhac.ti.yagi.vm.exceptions.IncompatibleOperationException;
     import de.fhac.ti.yagi.vm.exceptions.ArgumentCountMismatchException;
+    import de.fhac.ti.yagi.vm.exceptions.ArgumentNotValidException;
 
 
 import org.antlr.runtime.*;
@@ -119,7 +119,7 @@ public class YAGI_GrammarParser extends Parser {
 
 
     // $ANTLR start "line"
-    // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:64:1: line : ( declaration | block | term | list );
+    // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:65:1: line : ( declaration | block | term | list );
     public final void line() throws RecognitionException {
         YAGI_GrammarParser.term_return term1 =null;
 
@@ -127,7 +127,7 @@ public class YAGI_GrammarParser extends Parser {
 
 
         try {
-            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:64:5: ( declaration | block | term | list )
+            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:65:5: ( declaration | block | term | list )
             int alt1=4;
             switch ( input.LA(1) ) {
             case 10:
@@ -190,7 +190,7 @@ public class YAGI_GrammarParser extends Parser {
 
             switch (alt1) {
                 case 1 :
-                    // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:64:10: declaration
+                    // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:65:10: declaration
                     {
                     pushFollow(FOLLOW_declaration_in_line62);
                     declaration();
@@ -201,7 +201,7 @@ public class YAGI_GrammarParser extends Parser {
                     }
                     break;
                 case 2 :
-                    // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:66:10: block
+                    // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:67:10: block
                     {
                     pushFollow(FOLLOW_block_in_line84);
                     block();
@@ -212,7 +212,7 @@ public class YAGI_GrammarParser extends Parser {
                     }
                     break;
                 case 3 :
-                    // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:69:10: term
+                    // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:70:10: term
                     {
                     pushFollow(FOLLOW_term_in_line117);
                     term1=term();
@@ -227,11 +227,14 @@ public class YAGI_GrammarParser extends Parser {
                            	         AbstractSimpleModel model = (AbstractSimpleModel)mMemory.getTerm((term1!=null?term1.id:null));
                            	         SetType setType = model.getSetType();
                     		 Set<SetItem> values = model.getValues();
+                    		 StringBuilder strBuilder = new StringBuilder();
                     		 for (SetItem item : values) {
                                 	     // no need for type related conversions here.. just output the
                     	             // values's string representation
-                    		     mInstance.output(item.toString());
+                    	             strBuilder.append(item.toString()).append("/");
                     		 }
+                    		 strBuilder.delete(strBuilder.length() - 1, strBuilder.length());
+                    		 mInstance.output(strBuilder.toString());
                            	     } else {
                     	       	 mInstance.output("Term " + (term1!=null?term1.id:null) + " is not defined yet.");
                            	     }
@@ -240,7 +243,7 @@ public class YAGI_GrammarParser extends Parser {
                     }
                     break;
                 case 4 :
-                    // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:86:10: list
+                    // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:90:10: list
                     {
                     pushFollow(FOLLOW_list_in_line142);
                     list2=list();
@@ -274,10 +277,10 @@ public class YAGI_GrammarParser extends Parser {
 
 
     // $ANTLR start "declaration"
-    // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:92:1: declaration : ( fluent_decl | fact_decl | action_decl | assignment[true] );
+    // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:96:1: declaration : ( fluent_decl | fact_decl | action_decl | assignment[true] );
     public final void declaration() throws RecognitionException {
         try {
-            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:93:2: ( fluent_decl | fact_decl | action_decl | assignment[true] )
+            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:97:2: ( fluent_decl | fact_decl | action_decl | assignment[true] )
             int alt2=4;
             switch ( input.LA(1) ) {
             case 30:
@@ -312,7 +315,7 @@ public class YAGI_GrammarParser extends Parser {
 
             switch (alt2) {
                 case 1 :
-                    // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:93:7: fluent_decl
+                    // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:97:7: fluent_decl
                     {
                     pushFollow(FOLLOW_fluent_decl_in_declaration157);
                     fluent_decl();
@@ -323,7 +326,7 @@ public class YAGI_GrammarParser extends Parser {
                     }
                     break;
                 case 2 :
-                    // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:94:14: fact_decl
+                    // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:98:14: fact_decl
                     {
                     pushFollow(FOLLOW_fact_decl_in_declaration172);
                     fact_decl();
@@ -334,7 +337,7 @@ public class YAGI_GrammarParser extends Parser {
                     }
                     break;
                 case 3 :
-                    // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:95:11: action_decl
+                    // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:99:11: action_decl
                     {
                     pushFollow(FOLLOW_action_decl_in_declaration184);
                     action_decl();
@@ -345,7 +348,7 @@ public class YAGI_GrammarParser extends Parser {
                     }
                     break;
                 case 4 :
-                    // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:96:11: assignment[true]
+                    // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:100:11: assignment[true]
                     {
                     pushFollow(FOLLOW_assignment_in_declaration196);
                     assignment(true);
@@ -373,15 +376,15 @@ public class YAGI_GrammarParser extends Parser {
 
 
     // $ANTLR start "block"
-    // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:98:1: block : (s= statement | (s= statement )* );
+    // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:102:1: block : (s= statement | (s= statement )* );
     public final void block() throws RecognitionException {
         try {
-            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:99:2: (s= statement | (s= statement )* )
+            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:103:2: (s= statement | (s= statement )* )
             int alt4=2;
             alt4 = dfa4.predict(input);
             switch (alt4) {
                 case 1 :
-                    // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:99:4: s= statement
+                    // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:103:4: s= statement
                     {
                     pushFollow(FOLLOW_statement_in_block217);
                     statement();
@@ -395,9 +398,9 @@ public class YAGI_GrammarParser extends Parser {
                     }
                     break;
                 case 2 :
-                    // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:101:4: (s= statement )*
+                    // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:105:4: (s= statement )*
                     {
-                    // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:101:4: (s= statement )*
+                    // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:105:4: (s= statement )*
                     loop3:
                     do {
                         int alt3=2;
@@ -419,7 +422,7 @@ public class YAGI_GrammarParser extends Parser {
 
                         switch (alt3) {
                     	case 1 :
-                    	    // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:101:5: s= statement
+                    	    // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:105:5: s= statement
                     	    {
                     	    pushFollow(FOLLOW_statement_in_block227);
                     	    statement();
@@ -459,10 +462,10 @@ public class YAGI_GrammarParser extends Parser {
 
 
     // $ANTLR start "statement"
-    // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:104:1: statement : ( action_exec | pick | choose );
+    // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:108:1: statement : ( action_exec | pick | choose );
     public final void statement() throws RecognitionException {
         try {
-            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:105:2: ( action_exec | pick | choose )
+            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:109:2: ( action_exec | pick | choose )
             int alt5=3;
             int LA5_0 = input.LA(1);
 
@@ -515,7 +518,7 @@ public class YAGI_GrammarParser extends Parser {
             }
             switch (alt5) {
                 case 1 :
-                    // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:105:4: action_exec
+                    // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:109:4: action_exec
                     {
                     pushFollow(FOLLOW_action_exec_in_statement242);
                     action_exec();
@@ -531,7 +534,7 @@ public class YAGI_GrammarParser extends Parser {
                     }
                     break;
                 case 2 :
-                    // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:109:5: pick
+                    // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:113:5: pick
                     {
                     pushFollow(FOLLOW_pick_in_statement250);
                     pick();
@@ -542,7 +545,7 @@ public class YAGI_GrammarParser extends Parser {
                     }
                     break;
                 case 3 :
-                    // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:110:5: choose
+                    // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:114:5: choose
                     {
                     pushFollow(FOLLOW_choose_in_statement256);
                     choose();
@@ -570,15 +573,15 @@ public class YAGI_GrammarParser extends Parser {
 
 
     // $ANTLR start "action_exec"
-    // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:112:1: action_exec : i= ID '(' a= arglist ')' ;
+    // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:116:1: action_exec : i= ID '(' a= arglist ')' ;
     public final void action_exec() throws RecognitionException {
         Token i=null;
         YAGI_GrammarParser.arglist_return a =null;
 
 
         try {
-            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:113:2: (i= ID '(' a= arglist ')' )
-            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:114:4: i= ID '(' a= arglist ')'
+            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:117:2: (i= ID '(' a= arglist ')' )
+            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:118:4: i= ID '(' a= arglist ')'
             {
             i=(Token)match(input,ID,FOLLOW_ID_in_action_exec272); if (state.failed) return ;
 
@@ -603,8 +606,8 @@ public class YAGI_GrammarParser extends Parser {
             		            action.execute();
             		        } catch (ArgumentCountMismatchException e) {
             		            mInstance.output("Argument count mismatch.");
-            		        } catch (Exception e) {
-            		           mInstance.output("Passed argument is not valid."); 
+            		        } catch (ArgumentNotValidException e) {
+            		           mInstance.output(e.getMessage()); 
             		        }
             		    }
             		}
@@ -632,7 +635,7 @@ public class YAGI_GrammarParser extends Parser {
 
 
     // $ANTLR start "arglist"
-    // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:131:1: arglist returns [List<Var> args, boolean error] : v1= value[mMemory.getGlobalVar()] ( ',' v2= value[mMemory.getGlobalVar()] )* ;
+    // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:135:1: arglist returns [List<Var> args, boolean error] : v1= value[mMemory.getGlobalVar()] ( ',' v2= value[mMemory.getGlobalVar()] )* ;
     public final YAGI_GrammarParser.arglist_return arglist() throws RecognitionException {
         YAGI_GrammarParser.arglist_return retval = new YAGI_GrammarParser.arglist_return();
         retval.start = input.LT(1);
@@ -644,8 +647,8 @@ public class YAGI_GrammarParser extends Parser {
 
 
         try {
-            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:132:9: (v1= value[mMemory.getGlobalVar()] ( ',' v2= value[mMemory.getGlobalVar()] )* )
-            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:133:11: v1= value[mMemory.getGlobalVar()] ( ',' v2= value[mMemory.getGlobalVar()] )*
+            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:136:9: (v1= value[mMemory.getGlobalVar()] ( ',' v2= value[mMemory.getGlobalVar()] )* )
+            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:137:11: v1= value[mMemory.getGlobalVar()] ( ',' v2= value[mMemory.getGlobalVar()] )*
             {
             pushFollow(FOLLOW_value_in_arglist317);
             v1=value(mMemory.getGlobalVar());
@@ -667,7 +670,7 @@ public class YAGI_GrammarParser extends Parser {
             		    }   	        
             		}
 
-            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:146:3: ( ',' v2= value[mMemory.getGlobalVar()] )*
+            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:150:3: ( ',' v2= value[mMemory.getGlobalVar()] )*
             loop6:
             do {
                 int alt6=2;
@@ -680,7 +683,7 @@ public class YAGI_GrammarParser extends Parser {
 
                 switch (alt6) {
             	case 1 :
-            	    // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:146:5: ',' v2= value[mMemory.getGlobalVar()]
+            	    // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:150:5: ',' v2= value[mMemory.getGlobalVar()]
             	    {
             	    match(input,14,FOLLOW_14_in_arglist326); if (state.failed) return retval;
 
@@ -734,11 +737,11 @@ public class YAGI_GrammarParser extends Parser {
 
 
     // $ANTLR start "pick"
-    // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:160:1: pick :;
+    // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:164:1: pick :;
     public final void pick() throws RecognitionException {
         try {
-            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:160:6: ()
-            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:160:8: 
+            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:164:6: ()
+            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:164:8: 
             {
             }
 
@@ -753,11 +756,11 @@ public class YAGI_GrammarParser extends Parser {
 
 
     // $ANTLR start "choose"
-    // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:162:1: choose :;
+    // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:166:1: choose :;
     public final void choose() throws RecognitionException {
         try {
-            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:162:8: ()
-            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:162:10: 
+            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:166:8: ()
+            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:166:10: 
             {
             }
 
@@ -772,13 +775,13 @@ public class YAGI_GrammarParser extends Parser {
 
 
     // $ANTLR start "action_decl"
-    // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:164:1: action_decl returns [Action tempAction] : 'action' ID '(' varlist ')' ( 'precondition:' f= formula[$tempAction.getScope()] )? ( 'effect:' a= assignment[false] )? ( 'signal:' valexpr[$tempAction.getScope()] )? 'end action' ;
+    // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:168:1: action_decl returns [Action tempAction] : 'action' ID '(' varlist ')' ( 'precondition:' f= formula[$tempAction.getScope()] )? ( 'effect:' a= assignment[false] )? ( 'signal:' valexpr[$tempAction.getScope()] )? 'end action' ;
     public final Action action_decl() throws RecognitionException {
         Action tempAction = null;
 
 
         Token ID3=null;
-        Formula f =null;
+        YAGI_GrammarParser.formula_return f =null;
 
         Assign a =null;
 
@@ -786,8 +789,8 @@ public class YAGI_GrammarParser extends Parser {
 
 
         try {
-            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:165:9: ( 'action' ID '(' varlist ')' ( 'precondition:' f= formula[$tempAction.getScope()] )? ( 'effect:' a= assignment[false] )? ( 'signal:' valexpr[$tempAction.getScope()] )? 'end action' )
-            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:165:16: 'action' ID '(' varlist ')' ( 'precondition:' f= formula[$tempAction.getScope()] )? ( 'effect:' a= assignment[false] )? ( 'signal:' valexpr[$tempAction.getScope()] )? 'end action'
+            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:169:9: ( 'action' ID '(' varlist ')' ( 'precondition:' f= formula[$tempAction.getScope()] )? ( 'effect:' a= assignment[false] )? ( 'signal:' valexpr[$tempAction.getScope()] )? 'end action' )
+            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:169:16: 'action' ID '(' varlist ')' ( 'precondition:' f= formula[$tempAction.getScope()] )? ( 'effect:' a= assignment[false] )? ( 'signal:' valexpr[$tempAction.getScope()] )? 'end action'
             {
             match(input,23,FOLLOW_23_in_action_decl376); if (state.failed) return tempAction;
 
@@ -811,7 +814,7 @@ public class YAGI_GrammarParser extends Parser {
             		    tempAction.setScope(varlist4);
             		}
 
-            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:170:3: ( 'precondition:' f= formula[$tempAction.getScope()] )?
+            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:174:3: ( 'precondition:' f= formula[$tempAction.getScope()] )?
             int alt7=2;
             int LA7_0 = input.LA(1);
 
@@ -820,7 +823,7 @@ public class YAGI_GrammarParser extends Parser {
             }
             switch (alt7) {
                 case 1 :
-                    // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:170:4: 'precondition:' f= formula[$tempAction.getScope()]
+                    // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:174:4: 'precondition:' f= formula[$tempAction.getScope()]
                     {
                     match(input,36,FOLLOW_36_in_action_decl393); if (state.failed) return tempAction;
 
@@ -831,7 +834,11 @@ public class YAGI_GrammarParser extends Parser {
                     if (state.failed) return tempAction;
 
                     if ( state.backtracking==0 ) {
-                    		    tempAction.setFormula(f);
+                    		    if ((f!=null?f.valid:false)) {
+                    		    	tempAction.setFormula((f!=null?f.formulaObj:null));
+                    		    } else {
+                    		        mInstance.output(f.error);
+                    		    }
                     		}
 
                     }
@@ -840,7 +847,7 @@ public class YAGI_GrammarParser extends Parser {
             }
 
 
-            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:173:3: ( 'effect:' a= assignment[false] )?
+            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:181:3: ( 'effect:' a= assignment[false] )?
             int alt8=2;
             int LA8_0 = input.LA(1);
 
@@ -849,7 +856,7 @@ public class YAGI_GrammarParser extends Parser {
             }
             switch (alt8) {
                 case 1 :
-                    // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:173:4: 'effect:' a= assignment[false]
+                    // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:181:4: 'effect:' a= assignment[false]
                     {
                     match(input,25,FOLLOW_25_in_action_decl408); if (state.failed) return tempAction;
 
@@ -869,7 +876,7 @@ public class YAGI_GrammarParser extends Parser {
             }
 
 
-            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:176:3: ( 'signal:' valexpr[$tempAction.getScope()] )?
+            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:184:3: ( 'signal:' valexpr[$tempAction.getScope()] )?
             int alt9=2;
             int LA9_0 = input.LA(1);
 
@@ -878,7 +885,7 @@ public class YAGI_GrammarParser extends Parser {
             }
             switch (alt9) {
                 case 1 :
-                    // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:176:4: 'signal:' valexpr[$tempAction.getScope()]
+                    // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:184:4: 'signal:' valexpr[$tempAction.getScope()]
                     {
                     match(input,37,FOLLOW_37_in_action_decl423); if (state.failed) return tempAction;
 
@@ -925,7 +932,7 @@ public class YAGI_GrammarParser extends Parser {
 
 
     // $ANTLR start "assignment"
-    // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:188:1: assignment[boolean execute] returns [Assign assignObj] : assign[execute] ;
+    // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:196:1: assignment[boolean execute] returns [Assign assignObj] : assign[execute] ;
     public final Assign assignment(boolean execute) throws RecognitionException {
         Assign assignObj = null;
 
@@ -934,8 +941,8 @@ public class YAGI_GrammarParser extends Parser {
 
 
         try {
-            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:189:2: ( assign[execute] )
-            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:189:4: assign[execute]
+            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:197:2: ( assign[execute] )
+            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:197:4: assign[execute]
             {
             pushFollow(FOLLOW_assign_in_assignment448);
             assign5=assign(execute);
@@ -963,7 +970,7 @@ public class YAGI_GrammarParser extends Parser {
 
 
     // $ANTLR start "assign"
-    // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:191:1: assign[boolean execute] returns [Assign assignObj] : ( term '=' setexpr ';' | term '+=' setexpr ';' | term '-=' setexpr ';' | var[mMemory.getGlobalVar()] '=' valexpr[mMemory.getGlobalVar()] ';' );
+    // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:199:1: assign[boolean execute] returns [Assign assignObj] : ( term '=' setexpr ';' | term '+=' setexpr ';' | term '-=' setexpr ';' | var[mMemory.getGlobalVar()] '=' valexpr[mMemory.getGlobalVar()] ';' );
     public final Assign assign(boolean execute) throws RecognitionException {
         Assign assignObj = null;
 
@@ -986,7 +993,7 @@ public class YAGI_GrammarParser extends Parser {
 
 
         try {
-            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:192:2: ( term '=' setexpr ';' | term '+=' setexpr ';' | term '-=' setexpr ';' | var[mMemory.getGlobalVar()] '=' valexpr[mMemory.getGlobalVar()] ';' )
+            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:200:2: ( term '=' setexpr ';' | term '+=' setexpr ';' | term '-=' setexpr ';' | var[mMemory.getGlobalVar()] '=' valexpr[mMemory.getGlobalVar()] ';' )
             int alt10=4;
             int LA10_0 = input.LA(1);
 
@@ -1030,7 +1037,7 @@ public class YAGI_GrammarParser extends Parser {
             }
             switch (alt10) {
                 case 1 :
-                    // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:192:4: term '=' setexpr ';'
+                    // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:200:4: term '=' setexpr ';'
                     {
                     pushFollow(FOLLOW_term_in_assign470);
                     term6=term();
@@ -1074,7 +1081,7 @@ public class YAGI_GrammarParser extends Parser {
                     }
                     break;
                 case 2 :
-                    // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:214:5: term '+=' setexpr ';'
+                    // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:222:5: term '+=' setexpr ';'
                     {
                     pushFollow(FOLLOW_term_in_assign484);
                     term8=term();
@@ -1110,7 +1117,7 @@ public class YAGI_GrammarParser extends Parser {
                     }
                     break;
                 case 3 :
-                    // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:228:5: term '-=' setexpr ';'
+                    // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:236:5: term '-=' setexpr ';'
                     {
                     pushFollow(FOLLOW_term_in_assign498);
                     term10=term();
@@ -1147,7 +1154,7 @@ public class YAGI_GrammarParser extends Parser {
                     }
                     break;
                 case 4 :
-                    // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:248:5: var[mMemory.getGlobalVar()] '=' valexpr[mMemory.getGlobalVar()] ';'
+                    // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:256:5: var[mMemory.getGlobalVar()] '=' valexpr[mMemory.getGlobalVar()] ';'
                     {
                     pushFollow(FOLLOW_var_in_assign519);
                     var12=var(mMemory.getGlobalVar());
@@ -1197,7 +1204,7 @@ public class YAGI_GrammarParser extends Parser {
 
 
     // $ANTLR start "term"
-    // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:256:1: term returns [boolean exists, String output, String error, String id] : ID ;
+    // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:264:1: term returns [boolean exists, String output, String error, String id] : ID ;
     public final YAGI_GrammarParser.term_return term() throws RecognitionException {
         YAGI_GrammarParser.term_return retval = new YAGI_GrammarParser.term_return();
         retval.start = input.LT(1);
@@ -1206,8 +1213,8 @@ public class YAGI_GrammarParser extends Parser {
         Token ID14=null;
 
         try {
-            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:257:2: ( ID )
-            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:257:4: ID
+            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:265:2: ( ID )
+            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:265:4: ID
             {
             ID14=(Token)match(input,ID,FOLLOW_ID_in_term549); if (state.failed) return retval;
 
@@ -1243,7 +1250,7 @@ public class YAGI_GrammarParser extends Parser {
 
 
     // $ANTLR start "varlist"
-    // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:268:1: varlist returns [List<Var> varList] : v1= var[mMemory.getGlobalVar()] ( ',' v2= var[mMemory.getGlobalVar()] )* ;
+    // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:276:1: varlist returns [List<Var> varList] : v1= var[mMemory.getGlobalVar()] ( ',' v2= var[mMemory.getGlobalVar()] )* ;
     public final List<Var> varlist() throws RecognitionException {
         List<Var> varList = null;
 
@@ -1254,8 +1261,8 @@ public class YAGI_GrammarParser extends Parser {
 
 
         try {
-            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:269:2: (v1= var[mMemory.getGlobalVar()] ( ',' v2= var[mMemory.getGlobalVar()] )* )
-            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:269:4: v1= var[mMemory.getGlobalVar()] ( ',' v2= var[mMemory.getGlobalVar()] )*
+            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:277:2: (v1= var[mMemory.getGlobalVar()] ( ',' v2= var[mMemory.getGlobalVar()] )* )
+            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:277:4: v1= var[mMemory.getGlobalVar()] ( ',' v2= var[mMemory.getGlobalVar()] )*
             {
             pushFollow(FOLLOW_var_in_varlist568);
             v1=var(mMemory.getGlobalVar());
@@ -1269,7 +1276,7 @@ public class YAGI_GrammarParser extends Parser {
             		    varList.add(newVar); 
             		}
 
-            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:274:3: ( ',' v2= var[mMemory.getGlobalVar()] )*
+            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:282:3: ( ',' v2= var[mMemory.getGlobalVar()] )*
             loop11:
             do {
                 int alt11=2;
@@ -1282,7 +1289,7 @@ public class YAGI_GrammarParser extends Parser {
 
                 switch (alt11) {
             	case 1 :
-            	    // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:274:5: ',' v2= var[mMemory.getGlobalVar()]
+            	    // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:282:5: ',' v2= var[mMemory.getGlobalVar()]
             	    {
             	    match(input,14,FOLLOW_14_in_varlist577); if (state.failed) return varList;
 
@@ -1322,22 +1329,29 @@ public class YAGI_GrammarParser extends Parser {
     // $ANTLR end "varlist"
 
 
+    public static class formula_return extends ParserRuleReturnScope {
+        public Formula formulaObj;
+        public boolean valid;
+        public String error;
+    };
+
 
     // $ANTLR start "formula"
-    // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:279:1: formula[Map<String, Var> theScope] returns [Formula formulaObj] : (a= atom[theScope] | 'not' '(' b= formula[theScope] ')' | '(' a= atom[theScope] c= connective b= formula[theScope] ')' );
-    public final Formula formula(Map<String, Var> theScope) throws RecognitionException {
-        Formula formulaObj = null;
+    // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:287:1: formula[Map<String, Var> theScope] returns [Formula formulaObj, boolean valid, String error] : (a= atom[theScope] | 'not' '(' b= formula[theScope] ')' | '(' a= atom[theScope] c= connective b= formula[theScope] ')' );
+    public final YAGI_GrammarParser.formula_return formula(Map<String, Var> theScope) throws RecognitionException {
+        YAGI_GrammarParser.formula_return retval = new YAGI_GrammarParser.formula_return();
+        retval.start = input.LT(1);
 
 
-        Atom a =null;
+        YAGI_GrammarParser.atom_return a =null;
 
-        Formula b =null;
+        YAGI_GrammarParser.formula_return b =null;
 
         ConnectiveState c =null;
 
 
         try {
-            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:280:2: (a= atom[theScope] | 'not' '(' b= formula[theScope] ')' | '(' a= atom[theScope] c= connective b= formula[theScope] ')' )
+            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:288:2: (a= atom[theScope] | 'not' '(' b= formula[theScope] ')' | '(' a= atom[theScope] c= connective b= formula[theScope] ')' )
             int alt12=3;
             switch ( input.LA(1) ) {
             case ID:
@@ -1362,7 +1376,7 @@ public class YAGI_GrammarParser extends Parser {
                 }
                 break;
             default:
-                if (state.backtracking>0) {state.failed=true; return formulaObj;}
+                if (state.backtracking>0) {state.failed=true; return retval;}
                 NoViableAltException nvae =
                     new NoViableAltException("", 12, 0, input);
 
@@ -1372,78 +1386,96 @@ public class YAGI_GrammarParser extends Parser {
 
             switch (alt12) {
                 case 1 :
-                    // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:280:6: a= atom[theScope]
+                    // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:288:6: a= atom[theScope]
                     {
                     pushFollow(FOLLOW_atom_in_formula608);
                     a=atom(theScope);
 
                     state._fsp--;
-                    if (state.failed) return formulaObj;
+                    if (state.failed) return retval;
 
                     if ( state.backtracking==0 ) {
-                    	    formulaObj = new Formula(FormulaRule.FIRST, theScope);
-                    	    formulaObj.setAtom(a);          
+                    	    if ((a!=null?a.valid:false)) {
+                    	    	retval.formulaObj = new Formula(FormulaRule.FIRST, theScope);
+                    	    	retval.formulaObj.setAtom((a!=null?a.atomResult:null));          
+                    	    } else {
+                    	        retval.error = (a!=null?a.error:null);
+                    	    }
+                    	    retval.valid = (a!=null?a.valid:false);
                     	}
 
                     }
                     break;
                 case 2 :
-                    // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:284:4: 'not' '(' b= formula[theScope] ')'
+                    // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:297:4: 'not' '(' b= formula[theScope] ')'
                     {
-                    match(input,34,FOLLOW_34_in_formula619); if (state.failed) return formulaObj;
+                    match(input,34,FOLLOW_34_in_formula619); if (state.failed) return retval;
 
-                    match(input,11,FOLLOW_11_in_formula621); if (state.failed) return formulaObj;
+                    match(input,11,FOLLOW_11_in_formula621); if (state.failed) return retval;
 
                     pushFollow(FOLLOW_formula_in_formula625);
                     b=formula(theScope);
 
                     state._fsp--;
-                    if (state.failed) return formulaObj;
+                    if (state.failed) return retval;
 
-                    match(input,12,FOLLOW_12_in_formula628); if (state.failed) return formulaObj;
+                    match(input,12,FOLLOW_12_in_formula628); if (state.failed) return retval;
 
                     if ( state.backtracking==0 ) {
-                    	    formulaObj = new Formula(FormulaRule.SECOND, theScope);
-                    	    formulaObj.setFormula(b);
+                    	    if ((a!=null?a.valid:false)) {
+                    		retval.formulaObj = new Formula(FormulaRule.SECOND, theScope);
+                    		retval.formulaObj.setFormula((b!=null?b.formulaObj:null));
+                    	    } else {
+                    	        retval.error = (a!=null?a.error:null);
+                    	    }
+                    	    retval.valid = (a!=null?a.valid:false);
                     	}
 
                     }
                     break;
                 case 3 :
-                    // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:288:4: '(' a= atom[theScope] c= connective b= formula[theScope] ')'
+                    // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:306:4: '(' a= atom[theScope] c= connective b= formula[theScope] ')'
                     {
-                    match(input,11,FOLLOW_11_in_formula638); if (state.failed) return formulaObj;
+                    match(input,11,FOLLOW_11_in_formula638); if (state.failed) return retval;
 
                     pushFollow(FOLLOW_atom_in_formula642);
                     a=atom(theScope);
 
                     state._fsp--;
-                    if (state.failed) return formulaObj;
+                    if (state.failed) return retval;
 
                     pushFollow(FOLLOW_connective_in_formula647);
                     c=connective();
 
                     state._fsp--;
-                    if (state.failed) return formulaObj;
+                    if (state.failed) return retval;
 
                     pushFollow(FOLLOW_formula_in_formula651);
                     b=formula(theScope);
 
                     state._fsp--;
-                    if (state.failed) return formulaObj;
+                    if (state.failed) return retval;
 
-                    match(input,12,FOLLOW_12_in_formula654); if (state.failed) return formulaObj;
+                    match(input,12,FOLLOW_12_in_formula654); if (state.failed) return retval;
 
                     if ( state.backtracking==0 ) {
-                    	    formulaObj = new Formula(FormulaRule.THIRD, theScope);
-                    	    Connective conn = new Connective(c, a, b);
-                    	    formulaObj.setConnective(conn);
+                    	    if ((a!=null?a.valid:false) && (b!=null?b.valid:false)) {
+                      	        retval.formulaObj = new Formula(FormulaRule.THIRD, theScope);
+                    	        Connective conn = new Connective(c, (a!=null?a.atomResult:null), (b!=null?b.formulaObj:null));
+                    	        retval.formulaObj.setConnective(conn);
+                    	    } else {
+                    	        retval.error = (a!=null?a.error:null);
+                    	    }
+                    	    retval.valid = (a!=null?a.valid:false);
                     	}
 
                     }
                     break;
 
             }
+            retval.stop = input.LT(-1);
+
+
         }
         catch (RecognitionException re) {
             reportError(re);
@@ -1453,16 +1485,23 @@ public class YAGI_GrammarParser extends Parser {
         finally {
         	// do for sure before leaving
         }
-        return formulaObj;
+        return retval;
     }
     // $ANTLR end "formula"
 
 
+    public static class atom_return extends ParserRuleReturnScope {
+        public Atom atomResult;
+        public boolean valid;
+        public String error;
+    };
+
 
     // $ANTLR start "atom"
-    // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:298:1: atom[Map<String, Var> theScope] returns [Atom atomResult] : (e1= valexpr[theScope] c= comp_op e2= valexpr[theScope] |s1= setexpr c= comp_op s2= setexpr |v1= value[mMemory.getGlobalVar()] 'in' s2= setexpr | 'true' | 'false' );
-    public final Atom atom(Map<String, Var> theScope) throws RecognitionException {
-        Atom atomResult = null;
+    // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:321:1: atom[Map<String, Var> theScope] returns [Atom atomResult, boolean valid, String error] : (e1= valexpr[theScope] c= comp_op e2= valexpr[theScope] |s1= setexpr c= comp_op s2= setexpr |v1= value[mMemory.getGlobalVar()] 'in' s2= setexpr | 'true' | 'false' );
+    public final YAGI_GrammarParser.atom_return atom(Map<String, Var> theScope) throws RecognitionException {
+        YAGI_GrammarParser.atom_return retval = new YAGI_GrammarParser.atom_return();
+        retval.start = input.LT(1);
 
 
         YAGI_GrammarParser.valexpr_return e1 =null;
@@ -1479,7 +1518,7 @@ public class YAGI_GrammarParser extends Parser {
 
 
         try {
-            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:299:2: (e1= valexpr[theScope] c= comp_op e2= valexpr[theScope] |s1= setexpr c= comp_op s2= setexpr |v1= value[mMemory.getGlobalVar()] 'in' s2= setexpr | 'true' | 'false' )
+            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:322:2: (e1= valexpr[theScope] c= comp_op e2= valexpr[theScope] |s1= setexpr c= comp_op s2= setexpr |v1= value[mMemory.getGlobalVar()] 'in' s2= setexpr | 'true' | 'false' )
             int alt13=5;
             switch ( input.LA(1) ) {
             case INT:
@@ -1493,7 +1532,7 @@ public class YAGI_GrammarParser extends Parser {
                     alt13=3;
                 }
                 else {
-                    if (state.backtracking>0) {state.failed=true; return atomResult;}
+                    if (state.backtracking>0) {state.failed=true; return retval;}
                     NoViableAltException nvae =
                         new NoViableAltException("", 13, 1, input);
 
@@ -1513,7 +1552,7 @@ public class YAGI_GrammarParser extends Parser {
                     alt13=3;
                 }
                 else {
-                    if (state.backtracking>0) {state.failed=true; return atomResult;}
+                    if (state.backtracking>0) {state.failed=true; return retval;}
                     NoViableAltException nvae =
                         new NoViableAltException("", 13, 2, input);
 
@@ -1536,7 +1575,7 @@ public class YAGI_GrammarParser extends Parser {
                         alt13=3;
                     }
                     else {
-                        if (state.backtracking>0) {state.failed=true; return atomResult;}
+                        if (state.backtracking>0) {state.failed=true; return retval;}
                         NoViableAltException nvae =
                             new NoViableAltException("", 13, 9, input);
 
@@ -1545,7 +1584,7 @@ public class YAGI_GrammarParser extends Parser {
                     }
                 }
                 else {
-                    if (state.backtracking>0) {state.failed=true; return atomResult;}
+                    if (state.backtracking>0) {state.failed=true; return retval;}
                     NoViableAltException nvae =
                         new NoViableAltException("", 13, 3, input);
 
@@ -1571,7 +1610,7 @@ public class YAGI_GrammarParser extends Parser {
                 }
                 break;
             default:
-                if (state.backtracking>0) {state.failed=true; return atomResult;}
+                if (state.backtracking>0) {state.failed=true; return retval;}
                 NoViableAltException nvae =
                     new NoViableAltException("", 13, 0, input);
 
@@ -1581,58 +1620,60 @@ public class YAGI_GrammarParser extends Parser {
 
             switch (alt13) {
                 case 1 :
-                    // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:299:4: e1= valexpr[theScope] c= comp_op e2= valexpr[theScope]
+                    // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:322:4: e1= valexpr[theScope] c= comp_op e2= valexpr[theScope]
                     {
                     pushFollow(FOLLOW_valexpr_in_atom682);
                     e1=valexpr(theScope);
 
                     state._fsp--;
-                    if (state.failed) return atomResult;
+                    if (state.failed) return retval;
 
                     pushFollow(FOLLOW_comp_op_in_atom687);
                     c=comp_op();
 
                     state._fsp--;
-                    if (state.failed) return atomResult;
+                    if (state.failed) return retval;
 
                     pushFollow(FOLLOW_valexpr_in_atom691);
                     e2=valexpr(theScope);
 
                     state._fsp--;
-                    if (state.failed) return atomResult;
+                    if (state.failed) return retval;
 
                     if ( state.backtracking==0 ) {
-                    	            atomResult = new Atom(AtomRule.FIRST, theScope);
+                    	            retval.atomResult = new Atom(AtomRule.FIRST, theScope);
                     	            Var first = new Var((e1!=null?e1.name:null), (e1!=null?e1.v:null), (e1!=null?e1.setType:null));
                     	    	    Var second = new Var((e2!=null?e2.name:null), (e2!=null?e2.v:null), (e2!=null?e2.setType:null));
                     	    	    CompOperator op = c;
-                    	    	    atomResult.setFirstVar(first);
-                        	    	    atomResult.setSecondVar(second);
-                        	    	    atomResult.setCompOp(op);
+                    	    	    retval.atomResult.setFirstVar(first);
+                        	    	    retval.atomResult.setSecondVar(second);
+                        	    	    retval.atomResult.setCompOp(op);
+                        	    	    retval.valid = true;
+                        	    	    retval.error = "";
                     	}
 
                     }
                     break;
                 case 2 :
-                    // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:308:4: s1= setexpr c= comp_op s2= setexpr
+                    // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:333:4: s1= setexpr c= comp_op s2= setexpr
                     {
                     pushFollow(FOLLOW_setexpr_in_atom701);
                     s1=setexpr();
 
                     state._fsp--;
-                    if (state.failed) return atomResult;
+                    if (state.failed) return retval;
 
                     pushFollow(FOLLOW_comp_op_in_atom705);
                     c=comp_op();
 
                     state._fsp--;
-                    if (state.failed) return atomResult;
+                    if (state.failed) return retval;
 
                     pushFollow(FOLLOW_setexpr_in_atom709);
                     s2=setexpr();
 
                     state._fsp--;
-                    if (state.failed) return atomResult;
+                    if (state.failed) return retval;
 
                     if ( state.backtracking==0 ) {
                     	}
@@ -1640,43 +1681,64 @@ public class YAGI_GrammarParser extends Parser {
                     }
                     break;
                 case 3 :
-                    // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:310:4: v1= value[mMemory.getGlobalVar()] 'in' s2= setexpr
+                    // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:335:4: v1= value[mMemory.getGlobalVar()] 'in' s2= setexpr
                     {
                     pushFollow(FOLLOW_value_in_atom718);
                     v1=value(mMemory.getGlobalVar());
 
                     state._fsp--;
-                    if (state.failed) return atomResult;
+                    if (state.failed) return retval;
 
-                    match(input,32,FOLLOW_32_in_atom721); if (state.failed) return atomResult;
+                    match(input,32,FOLLOW_32_in_atom721); if (state.failed) return retval;
 
                     pushFollow(FOLLOW_setexpr_in_atom725);
                     s2=setexpr();
 
                     state._fsp--;
-                    if (state.failed) return atomResult;
+                    if (state.failed) return retval;
 
                     if ( state.backtracking==0 ) {
+                    	            if ((s2!=null?s2.valid:false)) {
+                    		        retval.atomResult = new Atom(AtomRule.THIRD, theScope);
+                    		        Var theVar = new Var((v1!=null?v1.name:null), (v1!=null?v1.v:null), (v1!=null?v1.type:null));
+                    		        retval.atomResult.setFirstVar(theVar);
+                    		        retval.atomResult.setFirstSet((s2!=null?s2.elems:null));
+                    		        retval.atomResult.setFirstSetType((s2!=null?s2.setType:null));
+                    		    } else {
+                    		        retval.error = (s2!=null?s2.error:null);
+                    		    }
+                    		    retval.valid = (s2!=null?s2.valid:false);
                     	}
 
                     }
                     break;
                 case 4 :
-                    // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:312:4: 'true'
+                    // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:347:4: 'true'
                     {
-                    match(input,38,FOLLOW_38_in_atom733); if (state.failed) return atomResult;
+                    match(input,38,FOLLOW_38_in_atom733); if (state.failed) return retval;
+
+                    if ( state.backtracking==0 ) {retval.atomResult = new Atom(AtomRule.FOURTH, theScope);
+                    			retval.atomResult.setStaticExpression(true);
+                    			retval.valid = true; retval.error = ""; }
 
                     }
                     break;
                 case 5 :
-                    // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:313:5: 'false'
+                    // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:350:5: 'false'
                     {
-                    match(input,29,FOLLOW_29_in_atom739); if (state.failed) return atomResult;
+                    match(input,29,FOLLOW_29_in_atom741); if (state.failed) return retval;
+
+                    if ( state.backtracking==0 ) {retval.atomResult = new Atom(AtomRule.FIFTH, theScope);
+                    			retval.atomResult.setStaticExpression(false);
+                    			retval.valid = true; retval.error = ""; }
 
                     }
                     break;
 
             }
+            retval.stop = input.LT(-1);
+
+
         }
         catch (RecognitionException re) {
             reportError(re);
@@ -1686,20 +1748,20 @@ public class YAGI_GrammarParser extends Parser {
         finally {
         	// do for sure before leaving
         }
-        return atomResult;
+        return retval;
     }
     // $ANTLR end "atom"
 
 
 
     // $ANTLR start "connective"
-    // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:315:1: connective returns [ConnectiveState connState] : ( 'and' | 'or' );
+    // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:354:1: connective returns [ConnectiveState connState] : ( 'and' | 'or' );
     public final ConnectiveState connective() throws RecognitionException {
         ConnectiveState connState = null;
 
 
         try {
-            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:316:2: ( 'and' | 'or' )
+            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:355:2: ( 'and' | 'or' )
             int alt14=2;
             int LA14_0 = input.LA(1);
 
@@ -1719,18 +1781,18 @@ public class YAGI_GrammarParser extends Parser {
             }
             switch (alt14) {
                 case 1 :
-                    // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:316:4: 'and'
+                    // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:355:4: 'and'
                     {
-                    match(input,24,FOLLOW_24_in_connective754); if (state.failed) return connState;
+                    match(input,24,FOLLOW_24_in_connective758); if (state.failed) return connState;
 
                     if ( state.backtracking==0 ) {connState = ConnectiveState.AND; }
 
                     }
                     break;
                 case 2 :
-                    // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:317:4: 'or'
+                    // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:356:4: 'or'
                     {
-                    match(input,35,FOLLOW_35_in_connective761); if (state.failed) return connState;
+                    match(input,35,FOLLOW_35_in_connective765); if (state.failed) return connState;
 
                     if ( state.backtracking==0 ) {connState = ConnectiveState.OR; }
 
@@ -1754,13 +1816,13 @@ public class YAGI_GrammarParser extends Parser {
 
 
     // $ANTLR start "comp_op"
-    // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:319:1: comp_op returns [CompOperator op] : ( '==' | '!=' | '<=' | '>=' | '<' | '>' );
+    // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:358:1: comp_op returns [CompOperator op] : ( '==' | '!=' | '<=' | '>=' | '<' | '>' );
     public final CompOperator comp_op() throws RecognitionException {
         CompOperator op = null;
 
 
         try {
-            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:320:2: ( '==' | '!=' | '<=' | '>=' | '<' | '>' )
+            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:359:2: ( '==' | '!=' | '<=' | '>=' | '<' | '>' )
             int alt15=6;
             switch ( input.LA(1) ) {
             case 20:
@@ -1804,54 +1866,54 @@ public class YAGI_GrammarParser extends Parser {
 
             switch (alt15) {
                 case 1 :
-                    // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:320:4: '=='
+                    // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:359:4: '=='
                     {
-                    match(input,20,FOLLOW_20_in_comp_op780); if (state.failed) return op;
+                    match(input,20,FOLLOW_20_in_comp_op784); if (state.failed) return op;
 
                     if ( state.backtracking==0 ) { op = CompOperator.EQUALS; }
 
                     }
                     break;
                 case 2 :
-                    // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:321:4: '!='
+                    // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:360:4: '!='
                     {
-                    match(input,9,FOLLOW_9_in_comp_op788); if (state.failed) return op;
+                    match(input,9,FOLLOW_9_in_comp_op792); if (state.failed) return op;
 
                     if ( state.backtracking==0 ) { op = CompOperator.NOT_EQUALS; }
 
                     }
                     break;
                 case 3 :
-                    // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:322:4: '<='
+                    // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:361:4: '<='
                     {
-                    match(input,18,FOLLOW_18_in_comp_op796); if (state.failed) return op;
+                    match(input,18,FOLLOW_18_in_comp_op800); if (state.failed) return op;
 
                     if ( state.backtracking==0 ) { op = CompOperator.LESS_OR_EQUAL; }
 
                     }
                     break;
                 case 4 :
-                    // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:323:4: '>='
+                    // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:362:4: '>='
                     {
-                    match(input,22,FOLLOW_22_in_comp_op804); if (state.failed) return op;
+                    match(input,22,FOLLOW_22_in_comp_op808); if (state.failed) return op;
 
                     if ( state.backtracking==0 ) { op = CompOperator.GREATER_OR_EQUAL; }
 
                     }
                     break;
                 case 5 :
-                    // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:324:4: '<'
+                    // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:363:4: '<'
                     {
-                    match(input,17,FOLLOW_17_in_comp_op813); if (state.failed) return op;
+                    match(input,17,FOLLOW_17_in_comp_op817); if (state.failed) return op;
 
                     if ( state.backtracking==0 ) { op = CompOperator.LESS; }
 
                     }
                     break;
                 case 6 :
-                    // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:325:4: '>'
+                    // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:364:4: '>'
                     {
-                    match(input,21,FOLLOW_21_in_comp_op821); if (state.failed) return op;
+                    match(input,21,FOLLOW_21_in_comp_op825); if (state.failed) return op;
 
                     if ( state.backtracking==0 ) { op = CompOperator.GREATER; }
 
@@ -1875,7 +1937,7 @@ public class YAGI_GrammarParser extends Parser {
 
 
     // $ANTLR start "list"
-    // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:327:1: list returns [String output] : 'list' list_term ';' ;
+    // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:366:1: list returns [String output] : 'list' list_term ';' ;
     public final String list() throws RecognitionException {
         String output = null;
 
@@ -1884,18 +1946,18 @@ public class YAGI_GrammarParser extends Parser {
 
 
         try {
-            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:327:29: ( 'list' list_term ';' )
-            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:328:2: 'list' list_term ';'
+            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:366:29: ( 'list' list_term ';' )
+            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:367:2: 'list' list_term ';'
             {
-            match(input,33,FOLLOW_33_in_list838); if (state.failed) return output;
+            match(input,33,FOLLOW_33_in_list842); if (state.failed) return output;
 
-            pushFollow(FOLLOW_list_term_in_list840);
+            pushFollow(FOLLOW_list_term_in_list844);
             list_term15=list_term();
 
             state._fsp--;
             if (state.failed) return output;
 
-            match(input,16,FOLLOW_16_in_list842); if (state.failed) return output;
+            match(input,16,FOLLOW_16_in_list846); if (state.failed) return output;
 
             if ( state.backtracking==0 ) { output = list_term15; }
 
@@ -1917,13 +1979,13 @@ public class YAGI_GrammarParser extends Parser {
 
 
     // $ANTLR start "list_term"
-    // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:330:1: list_term returns [String output] : ( 'fluents' | 'facts' );
+    // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:369:1: list_term returns [String output] : ( 'fluents' | 'facts' );
     public final String list_term() throws RecognitionException {
         String output = null;
 
 
         try {
-            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:330:35: ( 'fluents' | 'facts' )
+            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:369:35: ( 'fluents' | 'facts' )
             int alt16=2;
             int LA16_0 = input.LA(1);
 
@@ -1943,9 +2005,9 @@ public class YAGI_GrammarParser extends Parser {
             }
             switch (alt16) {
                 case 1 :
-                    // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:331:2: 'fluents'
+                    // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:370:2: 'fluents'
                     {
-                    match(input,31,FOLLOW_31_in_list_term861); if (state.failed) return output;
+                    match(input,31,FOLLOW_31_in_list_term865); if (state.failed) return output;
 
                     if ( state.backtracking==0 ) {
                     	    output = mMemory.listTerm(TermType.FLUENT);
@@ -1954,9 +2016,9 @@ public class YAGI_GrammarParser extends Parser {
                     }
                     break;
                 case 2 :
-                    // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:335:2: 'facts'
+                    // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:374:2: 'facts'
                     {
-                    match(input,28,FOLLOW_28_in_list_term870); if (state.failed) return output;
+                    match(input,28,FOLLOW_28_in_list_term874); if (state.failed) return output;
 
                     if ( state.backtracking==0 ) {
                     	    output = mMemory.listTerm(TermType.FACT);
@@ -1989,7 +2051,7 @@ public class YAGI_GrammarParser extends Parser {
 
 
     // $ANTLR start "setexpr"
-    // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:342:1: setexpr returns [List<SetItem> elems, SetType setType, boolean valid, String error] : set ;
+    // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:381:1: setexpr returns [List<SetItem> elems, SetType setType, boolean valid, String error] : set ;
     public final YAGI_GrammarParser.setexpr_return setexpr() throws RecognitionException {
         YAGI_GrammarParser.setexpr_return retval = new YAGI_GrammarParser.setexpr_return();
         retval.start = input.LT(1);
@@ -1999,10 +2061,10 @@ public class YAGI_GrammarParser extends Parser {
 
 
         try {
-            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:342:85: ( set )
-            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:343:2: set
+            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:381:85: ( set )
+            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:382:2: set
             {
-            pushFollow(FOLLOW_set_in_setexpr891);
+            pushFollow(FOLLOW_set_in_setexpr895);
             set16=set();
 
             state._fsp--;
@@ -2041,7 +2103,7 @@ public class YAGI_GrammarParser extends Parser {
 
 
     // $ANTLR start "set"
-    // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:348:1: set returns [List<SetItem> elems, SetType setType, boolean valid, String error] : ( '{' a= value[mMemory.getGlobalVar()] ( ',' b= value[mMemory.getGlobalVar()] )* '}' |t= term );
+    // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:387:1: set returns [List<SetItem> elems, SetType setType, boolean valid, String error] : ( '{' a= value[mMemory.getGlobalVar()] ( ',' b= value[mMemory.getGlobalVar()] )* '}' |t= term );
     public final YAGI_GrammarParser.set_return set() throws RecognitionException {
         YAGI_GrammarParser.set_return retval = new YAGI_GrammarParser.set_return();
         retval.start = input.LT(1);
@@ -2055,7 +2117,7 @@ public class YAGI_GrammarParser extends Parser {
 
 
         try {
-            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:348:81: ( '{' a= value[mMemory.getGlobalVar()] ( ',' b= value[mMemory.getGlobalVar()] )* '}' |t= term )
+            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:387:81: ( '{' a= value[mMemory.getGlobalVar()] ( ',' b= value[mMemory.getGlobalVar()] )* '}' |t= term )
             int alt18=2;
             int LA18_0 = input.LA(1);
 
@@ -2075,11 +2137,11 @@ public class YAGI_GrammarParser extends Parser {
             }
             switch (alt18) {
                 case 1 :
-                    // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:349:2: '{' a= value[mMemory.getGlobalVar()] ( ',' b= value[mMemory.getGlobalVar()] )* '}'
+                    // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:388:2: '{' a= value[mMemory.getGlobalVar()] ( ',' b= value[mMemory.getGlobalVar()] )* '}'
                     {
-                    match(input,39,FOLLOW_39_in_set907); if (state.failed) return retval;
+                    match(input,39,FOLLOW_39_in_set911); if (state.failed) return retval;
 
-                    pushFollow(FOLLOW_value_in_set911);
+                    pushFollow(FOLLOW_value_in_set915);
                     a=value(mMemory.getGlobalVar());
 
                     state._fsp--;
@@ -2093,7 +2155,7 @@ public class YAGI_GrammarParser extends Parser {
                     	    retval.valid = true;
                     	}
 
-                    // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:356:2: ( ',' b= value[mMemory.getGlobalVar()] )*
+                    // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:395:2: ( ',' b= value[mMemory.getGlobalVar()] )*
                     loop17:
                     do {
                         int alt17=2;
@@ -2106,11 +2168,11 @@ public class YAGI_GrammarParser extends Parser {
 
                         switch (alt17) {
                     	case 1 :
-                    	    // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:356:3: ',' b= value[mMemory.getGlobalVar()]
+                    	    // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:395:3: ',' b= value[mMemory.getGlobalVar()]
                     	    {
-                    	    match(input,14,FOLLOW_14_in_set918); if (state.failed) return retval;
+                    	    match(input,14,FOLLOW_14_in_set922); if (state.failed) return retval;
 
-                    	    pushFollow(FOLLOW_value_in_set922);
+                    	    pushFollow(FOLLOW_value_in_set926);
                     	    b=value(mMemory.getGlobalVar());
 
                     	    state._fsp--;
@@ -2130,14 +2192,14 @@ public class YAGI_GrammarParser extends Parser {
                     } while (true);
 
 
-                    match(input,40,FOLLOW_40_in_set930); if (state.failed) return retval;
+                    match(input,40,FOLLOW_40_in_set934); if (state.failed) return retval;
 
                     }
                     break;
                 case 2 :
-                    // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:360:4: t= term
+                    // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:399:4: t= term
                     {
-                    pushFollow(FOLLOW_term_in_set937);
+                    pushFollow(FOLLOW_term_in_set941);
                     t=term();
 
                     state._fsp--;
@@ -2186,7 +2248,7 @@ public class YAGI_GrammarParser extends Parser {
 
 
     // $ANTLR start "value"
-    // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:374:1: value[Map<String, Var> theScope] returns [String name, String v, SetType type] : ( INT | STRING | var[theScope] );
+    // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:413:1: value[Map<String, Var> theScope] returns [String name, String v, SetType type] : ( INT | STRING | var[theScope] );
     public final YAGI_GrammarParser.value_return value(Map<String, Var> theScope) throws RecognitionException {
         YAGI_GrammarParser.value_return retval = new YAGI_GrammarParser.value_return();
         retval.start = input.LT(1);
@@ -2198,7 +2260,7 @@ public class YAGI_GrammarParser extends Parser {
 
 
         try {
-            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:375:2: ( INT | STRING | var[theScope] )
+            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:414:2: ( INT | STRING | var[theScope] )
             int alt19=3;
             switch ( input.LA(1) ) {
             case INT:
@@ -2227,9 +2289,9 @@ public class YAGI_GrammarParser extends Parser {
 
             switch (alt19) {
                 case 1 :
-                    // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:375:4: INT
+                    // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:414:4: INT
                     {
-                    INT17=(Token)match(input,INT,FOLLOW_INT_in_value955); if (state.failed) return retval;
+                    INT17=(Token)match(input,INT,FOLLOW_INT_in_value959); if (state.failed) return retval;
 
                     if ( state.backtracking==0 ) {retval.name = "primitive";
                     	 		 retval.v = (INT17!=null?INT17.getText():null);
@@ -2238,9 +2300,9 @@ public class YAGI_GrammarParser extends Parser {
                     }
                     break;
                 case 2 :
-                    // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:378:4: STRING
+                    // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:417:4: STRING
                     {
-                    STRING18=(Token)match(input,STRING,FOLLOW_STRING_in_value962); if (state.failed) return retval;
+                    STRING18=(Token)match(input,STRING,FOLLOW_STRING_in_value966); if (state.failed) return retval;
 
                     if ( state.backtracking==0 ) {retval.name = "primitive";
                     			 retval.v = (STRING18!=null?STRING18.getText():null);
@@ -2249,9 +2311,9 @@ public class YAGI_GrammarParser extends Parser {
                     }
                     break;
                 case 3 :
-                    // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:381:4: var[theScope]
+                    // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:420:4: var[theScope]
                     {
-                    pushFollow(FOLLOW_var_in_value970);
+                    pushFollow(FOLLOW_var_in_value974);
                     var19=var(theScope);
 
                     state._fsp--;
@@ -2290,7 +2352,7 @@ public class YAGI_GrammarParser extends Parser {
 
 
     // $ANTLR start "var"
-    // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:386:1: var[Map<String, Var> theScope] returns [String id, String v, SetType setType] : '$' ID ;
+    // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:425:1: var[Map<String, Var> theScope] returns [String id, String v, SetType setType] : '$' ID ;
     public final YAGI_GrammarParser.var_return var(Map<String, Var> theScope) throws RecognitionException {
         YAGI_GrammarParser.var_return retval = new YAGI_GrammarParser.var_return();
         retval.start = input.LT(1);
@@ -2299,12 +2361,12 @@ public class YAGI_GrammarParser extends Parser {
         Token ID20=null;
 
         try {
-            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:387:2: ( '$' ID )
-            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:387:4: '$' ID
+            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:426:2: ( '$' ID )
+            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:426:4: '$' ID
             {
-            match(input,10,FOLLOW_10_in_var995); if (state.failed) return retval;
+            match(input,10,FOLLOW_10_in_var999); if (state.failed) return retval;
 
-            ID20=(Token)match(input,ID,FOLLOW_ID_in_var997); if (state.failed) return retval;
+            ID20=(Token)match(input,ID,FOLLOW_ID_in_var1001); if (state.failed) return retval;
 
             if ( state.backtracking==0 ) {
             	    if (theScope.containsKey((ID20!=null?ID20.getText():null))) {
@@ -2345,7 +2407,7 @@ public class YAGI_GrammarParser extends Parser {
 
 
     // $ANTLR start "valexpr"
-    // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:399:1: valexpr[Map<String, Var> theScope] returns [String name, String v, SetType setType] : value[theScope] ;
+    // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:438:1: valexpr[Map<String, Var> theScope] returns [String name, String v, SetType setType] : value[theScope] ;
     public final YAGI_GrammarParser.valexpr_return valexpr(Map<String, Var> theScope) throws RecognitionException {
         YAGI_GrammarParser.valexpr_return retval = new YAGI_GrammarParser.valexpr_return();
         retval.start = input.LT(1);
@@ -2355,10 +2417,10 @@ public class YAGI_GrammarParser extends Parser {
 
 
         try {
-            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:400:2: ( value[theScope] )
-            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:404:2: value[theScope]
+            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:439:2: ( value[theScope] )
+            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:443:2: value[theScope]
             {
-            pushFollow(FOLLOW_value_in_valexpr1023);
+            pushFollow(FOLLOW_value_in_valexpr1027);
             value21=value(theScope);
 
             state._fsp--;
@@ -2391,19 +2453,19 @@ public class YAGI_GrammarParser extends Parser {
 
 
     // $ANTLR start "fluent_decl"
-    // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:410:1: fluent_decl : 'fluent' ID ';' ;
+    // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:449:1: fluent_decl : 'fluent' ID ';' ;
     public final void fluent_decl() throws RecognitionException {
         Token ID22=null;
 
         try {
-            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:410:12: ( 'fluent' ID ';' )
-            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:410:15: 'fluent' ID ';'
+            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:449:12: ( 'fluent' ID ';' )
+            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:449:15: 'fluent' ID ';'
             {
-            match(input,30,FOLLOW_30_in_fluent_decl1035); if (state.failed) return ;
+            match(input,30,FOLLOW_30_in_fluent_decl1039); if (state.failed) return ;
 
-            ID22=(Token)match(input,ID,FOLLOW_ID_in_fluent_decl1037); if (state.failed) return ;
+            ID22=(Token)match(input,ID,FOLLOW_ID_in_fluent_decl1041); if (state.failed) return ;
 
-            match(input,16,FOLLOW_16_in_fluent_decl1039); if (state.failed) return ;
+            match(input,16,FOLLOW_16_in_fluent_decl1043); if (state.failed) return ;
 
             if ( state.backtracking==0 ) { 
             	Fluent fluent = new Fluent((ID22!=null?ID22.getText():null), TermType.FLUENT);
@@ -2434,19 +2496,19 @@ public class YAGI_GrammarParser extends Parser {
 
 
     // $ANTLR start "fact_decl"
-    // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:421:1: fact_decl : 'fact' ID ';' ;
+    // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:460:1: fact_decl : 'fact' ID ';' ;
     public final void fact_decl() throws RecognitionException {
         Token ID23=null;
 
         try {
-            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:421:10: ( 'fact' ID ';' )
-            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:421:13: 'fact' ID ';'
+            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:460:10: ( 'fact' ID ';' )
+            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:460:13: 'fact' ID ';'
             {
-            match(input,27,FOLLOW_27_in_fact_decl1050); if (state.failed) return ;
+            match(input,27,FOLLOW_27_in_fact_decl1054); if (state.failed) return ;
 
-            ID23=(Token)match(input,ID,FOLLOW_ID_in_fact_decl1052); if (state.failed) return ;
+            ID23=(Token)match(input,ID,FOLLOW_ID_in_fact_decl1056); if (state.failed) return ;
 
-            match(input,16,FOLLOW_16_in_fact_decl1054); if (state.failed) return ;
+            match(input,16,FOLLOW_16_in_fact_decl1058); if (state.failed) return ;
 
             if ( state.backtracking==0 ) { 
             	Fact fact = new Fact((ID23!=null?ID23.getText():null), TermType.FACT);
@@ -2476,8 +2538,8 @@ public class YAGI_GrammarParser extends Parser {
 
     // $ANTLR start synpred7_YAGI_Grammar
     public final void synpred7_YAGI_Grammar_fragment() throws RecognitionException {
-        // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:99:4: (s= statement )
-        // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:99:4: s= statement
+        // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:103:4: (s= statement )
+        // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:103:4: s= statement
         {
         pushFollow(FOLLOW_statement_in_synpred7_YAGI_Grammar217);
         statement();
@@ -2492,8 +2554,8 @@ public class YAGI_GrammarParser extends Parser {
 
     // $ANTLR start synpred8_YAGI_Grammar
     public final void synpred8_YAGI_Grammar_fragment() throws RecognitionException {
-        // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:101:5: (s= statement )
-        // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:101:5: s= statement
+        // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:105:5: (s= statement )
+        // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:105:5: s= statement
         {
         pushFollow(FOLLOW_statement_in_synpred8_YAGI_Grammar227);
         statement();
@@ -2508,8 +2570,8 @@ public class YAGI_GrammarParser extends Parser {
 
     // $ANTLR start synpred9_YAGI_Grammar
     public final void synpred9_YAGI_Grammar_fragment() throws RecognitionException {
-        // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:105:4: ( action_exec )
-        // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:105:4: action_exec
+        // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:109:4: ( action_exec )
+        // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:109:4: action_exec
         {
         pushFollow(FOLLOW_action_exec_in_synpred9_YAGI_Grammar242);
         action_exec();
@@ -2524,8 +2586,8 @@ public class YAGI_GrammarParser extends Parser {
 
     // $ANTLR start synpred10_YAGI_Grammar
     public final void synpred10_YAGI_Grammar_fragment() throws RecognitionException {
-        // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:109:5: ( pick )
-        // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:109:5: pick
+        // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:113:5: ( pick )
+        // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:113:5: pick
         {
         pushFollow(FOLLOW_pick_in_synpred10_YAGI_Grammar250);
         pick();
@@ -2666,7 +2728,7 @@ public class YAGI_GrammarParser extends Parser {
             this.transition = DFA4_transition;
         }
         public String getDescription() {
-            return "98:1: block : (s= statement | (s= statement )* );";
+            return "102:1: block : (s= statement | (s= statement )* );";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             TokenStream input = (TokenStream)_input;
@@ -2882,39 +2944,39 @@ public class YAGI_GrammarParser extends Parser {
     public static final BitSet FOLLOW_32_in_atom721 = new BitSet(new long[]{0x0000008000000020L});
     public static final BitSet FOLLOW_setexpr_in_atom725 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_38_in_atom733 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_29_in_atom739 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_24_in_connective754 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_35_in_connective761 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_20_in_comp_op780 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_9_in_comp_op788 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_18_in_comp_op796 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_22_in_comp_op804 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_17_in_comp_op813 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_21_in_comp_op821 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_33_in_list838 = new BitSet(new long[]{0x0000000090000000L});
-    public static final BitSet FOLLOW_list_term_in_list840 = new BitSet(new long[]{0x0000000000010000L});
-    public static final BitSet FOLLOW_16_in_list842 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_31_in_list_term861 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_28_in_list_term870 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_set_in_setexpr891 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_39_in_set907 = new BitSet(new long[]{0x00000000000004C0L});
-    public static final BitSet FOLLOW_value_in_set911 = new BitSet(new long[]{0x0000010000004000L});
-    public static final BitSet FOLLOW_14_in_set918 = new BitSet(new long[]{0x00000000000004C0L});
-    public static final BitSet FOLLOW_value_in_set922 = new BitSet(new long[]{0x0000010000004000L});
-    public static final BitSet FOLLOW_40_in_set930 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_term_in_set937 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_INT_in_value955 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_STRING_in_value962 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_var_in_value970 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_10_in_var995 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_ID_in_var997 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_value_in_valexpr1023 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_30_in_fluent_decl1035 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_ID_in_fluent_decl1037 = new BitSet(new long[]{0x0000000000010000L});
-    public static final BitSet FOLLOW_16_in_fluent_decl1039 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_27_in_fact_decl1050 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_ID_in_fact_decl1052 = new BitSet(new long[]{0x0000000000010000L});
-    public static final BitSet FOLLOW_16_in_fact_decl1054 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_29_in_atom741 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_24_in_connective758 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_35_in_connective765 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_20_in_comp_op784 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_9_in_comp_op792 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_18_in_comp_op800 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_22_in_comp_op808 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_17_in_comp_op817 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_21_in_comp_op825 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_33_in_list842 = new BitSet(new long[]{0x0000000090000000L});
+    public static final BitSet FOLLOW_list_term_in_list844 = new BitSet(new long[]{0x0000000000010000L});
+    public static final BitSet FOLLOW_16_in_list846 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_31_in_list_term865 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_28_in_list_term874 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_set_in_setexpr895 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_39_in_set911 = new BitSet(new long[]{0x00000000000004C0L});
+    public static final BitSet FOLLOW_value_in_set915 = new BitSet(new long[]{0x0000010000004000L});
+    public static final BitSet FOLLOW_14_in_set922 = new BitSet(new long[]{0x00000000000004C0L});
+    public static final BitSet FOLLOW_value_in_set926 = new BitSet(new long[]{0x0000010000004000L});
+    public static final BitSet FOLLOW_40_in_set934 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_term_in_set941 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_INT_in_value959 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_STRING_in_value966 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_var_in_value974 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_10_in_var999 = new BitSet(new long[]{0x0000000000000020L});
+    public static final BitSet FOLLOW_ID_in_var1001 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_value_in_valexpr1027 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_30_in_fluent_decl1039 = new BitSet(new long[]{0x0000000000000020L});
+    public static final BitSet FOLLOW_ID_in_fluent_decl1041 = new BitSet(new long[]{0x0000000000010000L});
+    public static final BitSet FOLLOW_16_in_fluent_decl1043 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_27_in_fact_decl1054 = new BitSet(new long[]{0x0000000000000020L});
+    public static final BitSet FOLLOW_ID_in_fact_decl1056 = new BitSet(new long[]{0x0000000000010000L});
+    public static final BitSet FOLLOW_16_in_fact_decl1058 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_statement_in_synpred7_YAGI_Grammar217 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_statement_in_synpred8_YAGI_Grammar227 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_action_exec_in_synpred9_YAGI_Grammar242 = new BitSet(new long[]{0x0000000000000002L});

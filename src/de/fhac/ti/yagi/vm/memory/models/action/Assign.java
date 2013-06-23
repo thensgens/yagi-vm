@@ -21,6 +21,7 @@ public class Assign {
     }
 
     public void execute() {
+        System.out.println("Assignment is executed.");
         if (mState == AssignState.ASSIGN) {
             mModel.clear();
             mModel.setSetType(mType);

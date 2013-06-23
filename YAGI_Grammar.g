@@ -40,6 +40,7 @@ options {
     import de.fhac.ti.yagi.vm.exceptions.TermAlreadyDeclaredException;
     import de.fhac.ti.yagi.vm.exceptions.IncompatibleOperationException;
     import de.fhac.ti.yagi.vm.exceptions.ArgumentCountMismatchException;
+    import de.fhac.ti.yagi.vm.exceptions.ArgumentNotValidException;
 }
 
 @members {    
@@ -73,11 +74,14 @@ line:  	 declaration
        	         AbstractSimpleModel model = (AbstractSimpleModel)mMemory.getTerm($term.id);
        	         SetType setType = model.getSetType();
 		 Set<SetItem> values = model.getValues();
+		 StringBuilder strBuilder = new StringBuilder();
 		 for (SetItem item : values) {
             	     // no need for type related conversions here.. just output the
 	             // values's string representation
-		     mInstance.output(item.toString());
+	             strBuilder.append(item.toString()).append("/");
 		 }
+		 strBuilder.delete(strBuilder.length() - 1, strBuilder.length());
+		 mInstance.output(strBuilder.toString());
        	     } else {
 	       	 mInstance.output("Term " + $term.id + " is not defined yet.");
        	     }
@@ -122,8 +126,8 @@ action_exec
 		            action.execute();
 		        } catch (ArgumentCountMismatchException e) {
 		            mInstance.output("Argument count mismatch.");
-		        } catch (Exception e) {
-		           mInstance.output("Passed argument is not valid."); 
+		        } catch (ArgumentNotValidException e) {
+		           mInstance.output(e.getMessage()); 
 		        }
 		    }
 		} ;
@@ -168,7 +172,11 @@ action_decl returns [Action tempAction]
 		    $tempAction.setScope($varlist.varList);
 		}
 		('precondition:' f=formula[$tempAction.getScope()] {
-		    $tempAction.setFormula($f.formulaObj);
+		    if ($f.valid) {
+		    	$tempAction.setFormula($f.formulaObj);
+		    } else {
+		        mInstance.output(f.error);
+		    }
 		} )?
 		('effect:' a=assignment[false] {
 		    $tempAction.setAssignment($a.assignObj);
@@ -276,26 +284,41 @@ varlist returns [List<Var> varList]
 		    $varList.add(newVar);
 		} )* ;
 		
-formula[Map<String, Var> theScope] returns [Formula formulaObj]
+formula[Map<String, Var> theScope] returns [Formula formulaObj, boolean valid, String error]
 	:   a=atom[theScope] {
-	    $formulaObj = new Formula(FormulaRule.FIRST, theScope);
-	    $formulaObj.setAtom($a.atomResult);          
+	    if ($a.valid) {
+	    	$formulaObj = new Formula(FormulaRule.FIRST, theScope);
+	    	$formulaObj.setAtom($a.atomResult);          
+	    } else {
+	        $error = $a.error;
+	    }
+	    $valid = $a.valid;
 	}			
 	|	'not' '(' b=formula[theScope] ')'	{
-	    $formulaObj = new Formula(FormulaRule.SECOND, theScope);
-	    $formulaObj.setFormula($b.formulaObj);
+	    if ($a.valid) {
+		$formulaObj = new Formula(FormulaRule.SECOND, theScope);
+		$formulaObj.setFormula($b.formulaObj);
+	    } else {
+	        $error = $a.error;
+	    }
+	    $valid = $a.valid;
 	}			
 	|	'(' a=atom[theScope] c=connective b=formula[theScope] ')' {
-	    $formulaObj = new Formula(FormulaRule.THIRD, theScope);
-	    Connective conn = new Connective($c.connState, $a.atomResult, $b.formulaObj);
-	    $formulaObj.setConnective(conn);
+	    if ($a.valid && $b.valid) {
+  	        $formulaObj = new Formula(FormulaRule.THIRD, theScope);
+	        Connective conn = new Connective($c.connState, $a.atomResult, $b.formulaObj);
+	        $formulaObj.setConnective(conn);
+	    } else {
+	        $error = $a.error;
+	    }
+	    $valid = $a.valid;
 	}	
 	/* these rules are not implemented for now... */
 	//|	'exists' v=var 'in' s=setexpr 'such' b=formula
 	//|	'all' v=var 'in' s=setexpr 'such' b=formula ;
 	;
 
-atom[Map<String, Var> theScope] returns [Atom atomResult]
+atom[Map<String, Var> theScope] returns [Atom atomResult, boolean valid, String error]
 	:	e1=valexpr[theScope] c=comp_op e2=valexpr[theScope] {
 	            $atomResult = new Atom(AtomRule.FIRST, theScope);
 	            Var first = new Var($e1.name, $e1.v, $e1.setType);
@@ -304,13 +327,29 @@ atom[Map<String, Var> theScope] returns [Atom atomResult]
 	    	    $atomResult.setFirstVar(first);
     	    	    $atomResult.setSecondVar(second);
     	    	    $atomResult.setCompOp(op);
+    	    	    $valid = true;
+    	    	    $error = "";
 	}
 	|	s1=setexpr c=comp_op s2=setexpr {
 	}
 	|	v1=value[mMemory.getGlobalVar()] 'in' s2=setexpr {
+	            if ($s2.valid) {
+		        $atomResult = new Atom(AtomRule.THIRD, theScope);
+		        Var theVar = new Var($v1.name, $v1.v, $v1.type);
+		        $atomResult.setFirstVar(theVar);
+		        $atomResult.setFirstSet($s2.elems);
+		        $atomResult.setFirstSetType($s2.setType);
+		    } else {
+		        $error = $s2.error;
+		    }
+		    $valid = $s2.valid;
 	}	
-	|	'true'
-	| 	'false' ;
+	|	'true' {$atomResult = new Atom(AtomRule.FOURTH, theScope);
+			$atomResult.setStaticExpression(true);
+			$valid = true; $error = ""; }
+	| 	'false' {$atomResult = new Atom(AtomRule.FIFTH, theScope);
+			$atomResult.setStaticExpression(false);
+			$valid = true; $error = ""; } ;
 	
 connective returns [ConnectiveState connState]
 	:	'and' {$connState = ConnectiveState.AND; }
@@ -367,7 +406,7 @@ set returns [List<SetItem> elems, SetType setType, boolean valid, String error] 
 	        }
 	        $setType = term.getSetType();
 	    } else {
-	        $error = $term.error;
+	        $error = $t.error;
 	    }
 	} ;
 	
