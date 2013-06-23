@@ -1,4 +1,4 @@
-// $ANTLR 3.4 /home/thens/yagi/yagi-vm/YAGI_Grammar.g 2013-06-23 23:03:31
+// $ANTLR 3.4 /home/thens/yagi/yagi-vm/YAGI_Grammar.g 2013-06-23 23:35:25
 
   package de.fhac.ti.yagi.gen;
   
@@ -1324,9 +1324,9 @@ public class YAGI_GrammarParser extends Parser {
 
 
     // $ANTLR start "formula"
-    // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:279:1: formula[Map<String, Var> theScope] returns [Formula formula] : (a= atom[theScope] | 'not' '(' b= formula[theScope] ')' | '(' a= atom[theScope] c= connective b= formula[theScope] ')' );
+    // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:279:1: formula[Map<String, Var> theScope] returns [Formula formulaObj] : (a= atom[theScope] | 'not' '(' b= formula[theScope] ')' | '(' a= atom[theScope] c= connective b= formula[theScope] ')' );
     public final Formula formula(Map<String, Var> theScope) throws RecognitionException {
-        Formula formula = null;
+        Formula formulaObj = null;
 
 
         Atom a =null;
@@ -1362,7 +1362,7 @@ public class YAGI_GrammarParser extends Parser {
                 }
                 break;
             default:
-                if (state.backtracking>0) {state.failed=true; return formula;}
+                if (state.backtracking>0) {state.failed=true; return formulaObj;}
                 NoViableAltException nvae =
                     new NoViableAltException("", 12, 0, input);
 
@@ -1378,11 +1378,11 @@ public class YAGI_GrammarParser extends Parser {
                     a=atom(theScope);
 
                     state._fsp--;
-                    if (state.failed) return formula;
+                    if (state.failed) return formulaObj;
 
                     if ( state.backtracking==0 ) {
-                    	    formula = new Formula(FormulaRule.FIRST, theScope);
-                    	    formula.setAtom(a);          
+                    	    formulaObj = new Formula(FormulaRule.FIRST, theScope);
+                    	    formulaObj.setAtom(a);          
                     	}
 
                     }
@@ -1390,21 +1390,21 @@ public class YAGI_GrammarParser extends Parser {
                 case 2 :
                     // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:284:4: 'not' '(' b= formula[theScope] ')'
                     {
-                    match(input,34,FOLLOW_34_in_formula619); if (state.failed) return formula;
+                    match(input,34,FOLLOW_34_in_formula619); if (state.failed) return formulaObj;
 
-                    match(input,11,FOLLOW_11_in_formula621); if (state.failed) return formula;
+                    match(input,11,FOLLOW_11_in_formula621); if (state.failed) return formulaObj;
 
                     pushFollow(FOLLOW_formula_in_formula625);
                     b=formula(theScope);
 
                     state._fsp--;
-                    if (state.failed) return formula;
+                    if (state.failed) return formulaObj;
 
-                    match(input,12,FOLLOW_12_in_formula628); if (state.failed) return formula;
+                    match(input,12,FOLLOW_12_in_formula628); if (state.failed) return formulaObj;
 
                     if ( state.backtracking==0 ) {
-                    	    formula = new Formula(FormulaRule.SECOND, theScope);
-                    	    formula.setFormula(b);
+                    	    formulaObj = new Formula(FormulaRule.SECOND, theScope);
+                    	    formulaObj.setFormula(b);
                     	}
 
                     }
@@ -1412,32 +1412,32 @@ public class YAGI_GrammarParser extends Parser {
                 case 3 :
                     // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:288:4: '(' a= atom[theScope] c= connective b= formula[theScope] ')'
                     {
-                    match(input,11,FOLLOW_11_in_formula638); if (state.failed) return formula;
+                    match(input,11,FOLLOW_11_in_formula638); if (state.failed) return formulaObj;
 
                     pushFollow(FOLLOW_atom_in_formula642);
                     a=atom(theScope);
 
                     state._fsp--;
-                    if (state.failed) return formula;
+                    if (state.failed) return formulaObj;
 
                     pushFollow(FOLLOW_connective_in_formula647);
                     c=connective();
 
                     state._fsp--;
-                    if (state.failed) return formula;
+                    if (state.failed) return formulaObj;
 
                     pushFollow(FOLLOW_formula_in_formula651);
                     b=formula(theScope);
 
                     state._fsp--;
-                    if (state.failed) return formula;
+                    if (state.failed) return formulaObj;
 
-                    match(input,12,FOLLOW_12_in_formula654); if (state.failed) return formula;
+                    match(input,12,FOLLOW_12_in_formula654); if (state.failed) return formulaObj;
 
                     if ( state.backtracking==0 ) {
-                    	    formula = new Formula(FormulaRule.THIRD, theScope);
+                    	    formulaObj = new Formula(FormulaRule.THIRD, theScope);
                     	    Connective conn = new Connective(c, a, b);
-                    	    formula.setConnective(conn);
+                    	    formulaObj.setConnective(conn);
                     	}
 
                     }
@@ -1453,7 +1453,7 @@ public class YAGI_GrammarParser extends Parser {
         finally {
         	// do for sure before leaving
         }
-        return formula;
+        return formulaObj;
     }
     // $ANTLR end "formula"
 

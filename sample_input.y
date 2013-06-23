@@ -6,6 +6,6 @@ off = on;
 $n = 1;
 $m = 2;
 
-action myFoo($foo, $bar) precondition: $foo > $bar effect: on -= {2,3}; end action
-myFoo($n, $m, 1)
+action myFoo($foo, $bar) precondition: ($foo < $bar and $foo != $bar) effect: on -= {2,3}; end action
+myFoo(1,2)
 on

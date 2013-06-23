@@ -42,6 +42,9 @@ public class Formula implements ConditionObject {
         if (mFormula != null) {
             mFormula.updateScope(scope);
         }
+        if (mConnective != null) {
+            mConnective.updateScope(scope);
+        }
     }
 
     public void setAtom(Atom atom) {

@@ -1,4 +1,4 @@
-// $ANTLR 3.4 /home/thens/yagi/yagi-vm/YAGI_Grammar.g 2013-06-23 23:03:31
+// $ANTLR 3.4 /home/thens/yagi/yagi-vm/YAGI_Grammar.g 2013-06-23 23:35:25
 package de.fhac.ti.yagi.gen;
 
 import org.antlr.runtime.*;

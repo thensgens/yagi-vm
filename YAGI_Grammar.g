@@ -168,7 +168,7 @@ action_decl returns [Action tempAction]
 		    $tempAction.setScope($varlist.varList);
 		}
 		('precondition:' f=formula[$tempAction.getScope()] {
-		    $tempAction.setFormula($f.formula);
+		    $tempAction.setFormula($f.formulaObj);
 		} )?
 		('effect:' a=assignment[false] {
 		    $tempAction.setAssignment($a.assignObj);
@@ -276,19 +276,19 @@ varlist returns [List<Var> varList]
 		    $varList.add(newVar);
 		} )* ;
 		
-formula[Map<String, Var> theScope] returns [Formula formula]
+formula[Map<String, Var> theScope] returns [Formula formulaObj]
 	:   a=atom[theScope] {
-	    $formula = new Formula(FormulaRule.FIRST, theScope);
-	    $formula.setAtom($a.atomResult);          
+	    $formulaObj = new Formula(FormulaRule.FIRST, theScope);
+	    $formulaObj.setAtom($a.atomResult);          
 	}			
 	|	'not' '(' b=formula[theScope] ')'	{
-	    $formula = new Formula(FormulaRule.SECOND, theScope);
-	    $formula.setFormula($b.formula);
+	    $formulaObj = new Formula(FormulaRule.SECOND, theScope);
+	    $formulaObj.setFormula($b.formulaObj);
 	}			
 	|	'(' a=atom[theScope] c=connective b=formula[theScope] ')' {
-	    $formula = new Formula(FormulaRule.THIRD, theScope);
-	    Connective conn = new Connective($c.connState, $a.atomResult, $b.formula);
-	    $formula.setConnective(conn);
+	    $formulaObj = new Formula(FormulaRule.THIRD, theScope);
+	    Connective conn = new Connective($c.connState, $a.atomResult, $b.formulaObj);
+	    $formulaObj.setConnective(conn);
 	}	
 	/* these rules are not implemented for now... */
 	//|	'exists' v=var 'in' s=setexpr 'such' b=formula
