@@ -64,5 +64,4 @@ public abstract class AbstractGlobalModel {
     public void clear() {
         mValues.clear();
     }
-
 }

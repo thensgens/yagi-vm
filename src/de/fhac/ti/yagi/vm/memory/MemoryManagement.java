@@ -5,6 +5,10 @@ import de.fhac.ti.yagi.vm.exceptions.ModelNotFoundException;
 import de.fhac.ti.yagi.vm.exceptions.TermAlreadyDeclaredException;
 import de.fhac.ti.yagi.vm.interfaces.State;
 import de.fhac.ti.yagi.vm.memory.models.AbstractGlobalModel;
+import de.fhac.ti.yagi.vm.memory.models.Var;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * This class holds all relevant information about the VM's current context (declarations, states, ...)
@@ -14,12 +18,16 @@ public class MemoryManagement {
     private State mFluentState;
     private State mFactState;
 
+    /* used for testing vars.. 'bootstrapping problem' here.. */
+    private Map<String, Var> mGlobalTestVars;
+
     /**
      * The default constructor will initialize all underlying data structures so that they are ready to use.
      */
     public MemoryManagement() {
         mFluentState = new FluentState();
         mFactState = new FactState();
+        mGlobalTestVars = new HashMap<String, Var>();
     }
 
     /**
@@ -97,6 +105,12 @@ public class MemoryManagement {
             mFactState.add(fact);
         } else {
             throw new TermAlreadyDeclaredException("Term " + fact.getName() + " already defined.");
+        }
+    }
+
+    public void addGlobalVar(Var var) {
+        if (var != null) {
+            mGlobalTestVars.put(var.getName(), var);
         }
     }
 

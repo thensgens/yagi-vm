@@ -22,6 +22,7 @@ options {
     import de.fhac.ti.yagi.vm.memory.SetType;
     import de.fhac.ti.yagi.vm.memory.models.Fluent;
     import de.fhac.ti.yagi.vm.memory.models.Fact;
+    import de.fhac.ti.yagi.vm.memory.models.Var;
     import de.fhac.ti.yagi.vm.memory.SetItem;    
     import de.fhac.ti.yagi.vm.memory.models.AbstractGlobalModel;
     import de.fhac.ti.yagi.vm.exceptions.InvalidModelException;
@@ -59,7 +60,7 @@ line:  	 declaration
        	         SetType setType = model.getSetType();
 		 Set<SetItem> values = model.getValues();
 		 for (SetItem item : values) {
-            	     // no need type related conversions here.. just output the
+            	     // no need for type related conversions here.. just output the
 	             // values's string representation
 		     mInstance.output(item.toString());
 		 }
@@ -88,7 +89,7 @@ block
 
 statement
 	:	action_exec {
-		    // pretty much execute (and everything that's necessary) the action
+		    // pretty much execute the specified action
 		    // ...
 		}
 	| 	pick
@@ -140,12 +141,15 @@ assign	:	term '=' setexpr ';' {
 	}
 	
 	/* the following rules are not used as assignments (like in the
-	   "original" YAGI grammar.
+	   "original" YAGI grammar).
 	*/
-	| 	var '=' valexpr {      
+	// this rule is currently used for 'bootstrapping' the first vars (testing purposes)
+	| 	var '=' valexpr ';' { 
+	    Var newVar = new Var($var.id, $valexpr.v, $valexpr.setType);
+	    mMemory.addGlobalVar(newVar);       
 	}
-	| 	var '+=' valexpr
-	|	var '-=' valexpr ;
+	| 	var '+=' valexpr ';'
+	|	var '-=' valexpr ';' ;
 
 term returns [boolean exists, String output, String error, String id]
 	:	ID {
@@ -223,7 +227,7 @@ var returns [String id, SetType setType]
 valexpr	returns [String v, SetType setType]
 	:		
 	/* only simple value expressions for now...
-	    value (('+'|'-') value)* ;
+	    ... value (('+'|'-') value)* ; ...
 	*/
 	value {
 	    $v = $value.v;
