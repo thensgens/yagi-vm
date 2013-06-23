@@ -2,8 +2,9 @@ package de.fhac.ti.yagi.vm.memory;
 
 import de.fhac.ti.yagi.vm.exceptions.InvalidModelException;
 import de.fhac.ti.yagi.vm.exceptions.ModelNotFoundException;
+import de.fhac.ti.yagi.vm.interfaces.AbstractModel;
 import de.fhac.ti.yagi.vm.interfaces.State;
-import de.fhac.ti.yagi.vm.memory.models.AbstractGlobalModel;
+import de.fhac.ti.yagi.vm.memory.models.AbstractSimpleModel;
 import de.fhac.ti.yagi.vm.memory.models.Fluent;
 
 import java.util.HashMap;
@@ -24,7 +25,7 @@ public class FluentState implements State {
     }
 
     @Override
-    public void add(AbstractGlobalModel model) throws InvalidModelException {
+    public void add(AbstractModel model) throws InvalidModelException {
         if (! (model instanceof  Fluent)) {
             throw new InvalidModelException(INVALID_MODEL);
         }
@@ -34,7 +35,7 @@ public class FluentState implements State {
     }
 
     @Override
-    public void remove(AbstractGlobalModel model) throws InvalidModelException {
+    public void remove(AbstractModel model) throws InvalidModelException {
         if (! (model instanceof  Fluent)) {
             throw new InvalidModelException(INVALID_MODEL);
         }
@@ -44,9 +45,9 @@ public class FluentState implements State {
     }
 
     @Override
-    public AbstractGlobalModel get(String identifier) throws ModelNotFoundException {
+    public AbstractModel get(String identifier){
         if (! mFluents.containsKey(identifier)) {
-            throw new ModelNotFoundException(MODEL_NOT_FOUND);
+            return null;
         }
 
         return mFluents.get(identifier);

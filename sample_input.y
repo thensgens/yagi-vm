@@ -4,4 +4,8 @@ on
 fluent off;
 off = on;
 $n = 1;
-list fluents;
+$m = 2;
+
+action myFoo($foo, $bar) precondition: $foo > $bar effect: on -= {2,3}; end action
+myFoo($n, $m, 1)
+on

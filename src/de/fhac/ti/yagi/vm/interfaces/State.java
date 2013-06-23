@@ -2,7 +2,7 @@ package de.fhac.ti.yagi.vm.interfaces;
 
 import de.fhac.ti.yagi.vm.exceptions.InvalidModelException;
 import de.fhac.ti.yagi.vm.exceptions.ModelNotFoundException;
-import de.fhac.ti.yagi.vm.memory.models.AbstractGlobalModel;
+import de.fhac.ti.yagi.vm.memory.models.AbstractSimpleModel;
 
 public interface State {
 
@@ -11,7 +11,7 @@ public interface State {
      * @param model
      * @throws InvalidModelException
      */
-    public void add(AbstractGlobalModel model) throws InvalidModelException;
+    void add(AbstractModel model) throws InvalidModelException;
 
     /**
      * The remove method will remove the specified model from the state if it's present in the state.
@@ -19,7 +19,7 @@ public interface State {
      * @param model
      * @throws InvalidModelException
      */
-    public void remove(AbstractGlobalModel model) throws InvalidModelException;
+    void remove(AbstractModel model) throws InvalidModelException;
 
     /**
      * This method will return the mapped model, specified by the parameter (ID).
@@ -29,23 +29,23 @@ public interface State {
      * @return The mapped Model (if present).
      * @throws ModelNotFoundException
      */
-    public AbstractGlobalModel get(String identifier) throws ModelNotFoundException;
+    AbstractModel get(String identifier);
 
     /**
      * This method checks if the term (specified by its id) is present in the current state.
      * @param id The term's identifier
      * @return True if the term is present; false otherwise.
      */
-    public boolean contains(String id);
+    boolean contains(String id);
 
     /**
      * This method will list the whole content of the state conveniently.
      * @return The "stringified" representation of the current state.
      */
-    public String listState();
+    String listState();
 
     /**
      *  This method will clear the whole state (and therefore clear all underlying data structures).
      */
-    public void clearState();
+    void clearState();
 }

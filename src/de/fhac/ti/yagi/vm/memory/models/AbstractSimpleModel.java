@@ -1,5 +1,6 @@
 package de.fhac.ti.yagi.vm.memory.models;
 
+import de.fhac.ti.yagi.vm.interfaces.AbstractModel;
 import de.fhac.ti.yagi.vm.memory.MemoryManagement;
 import de.fhac.ti.yagi.vm.memory.SetItem;
 import de.fhac.ti.yagi.vm.memory.SetType;
@@ -8,7 +9,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public abstract class AbstractGlobalModel {
+public abstract class AbstractSimpleModel implements AbstractModel {
 
     protected String mName;
     protected MemoryManagement.TermType mTermType;
@@ -16,18 +17,18 @@ public abstract class AbstractGlobalModel {
     protected SetType mSetType;
     protected Set<SetItem> mValues;
 
-    public AbstractGlobalModel() {
+    public AbstractSimpleModel() {
         mValues = new HashSet<SetItem>();
     }
 
-    public AbstractGlobalModel(String name, MemoryManagement.TermType termType, SetType setType) {
+    public AbstractSimpleModel(String name, MemoryManagement.TermType termType, SetType setType) {
         this();
         mName = name;
         mTermType = termType;
         mSetType = setType;
     }
 
-    public AbstractGlobalModel(String name, MemoryManagement.TermType termType) {
+    public AbstractSimpleModel(String name, MemoryManagement.TermType termType) {
         this();
         mName = name;
         mTermType = termType;
