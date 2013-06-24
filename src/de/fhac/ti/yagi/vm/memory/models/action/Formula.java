@@ -3,6 +3,7 @@ package de.fhac.ti.yagi.vm.memory.models.action;
 import de.fhac.ti.yagi.vm.exceptions.IncompatibleOperationException;
 import de.fhac.ti.yagi.vm.exceptions.VarNotInScopeException;
 import de.fhac.ti.yagi.vm.interfaces.ConditionObject;
+import de.fhac.ti.yagi.vm.interfaces.Execution;
 import de.fhac.ti.yagi.vm.memory.models.Var;
 
 import java.util.Map;

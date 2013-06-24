@@ -1,18 +1,23 @@
 package de.fhac.ti.yagi.vm.memory.models.action;
 
 import de.fhac.ti.yagi.vm.exceptions.*;
+import de.fhac.ti.yagi.vm.interfaces.Execution;
 import de.fhac.ti.yagi.vm.memory.models.AbstractComplexModel;
 import de.fhac.ti.yagi.vm.memory.models.Var;
 
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class Action extends AbstractComplexModel {
+public class Action extends AbstractComplexModel implements Execution {
 
     private Map<String, Var> mScope;
     private Formula mFormula;
-    private Assign mAssign;
+    private Execution mAssign;
+    private Signal mSignal;
 
     public Action(String name) {
         super(name);
@@ -42,13 +47,24 @@ public class Action extends AbstractComplexModel {
             newScope.put(var.getName(), argumentVar);
         }
         mScope = newScope;
-        if (isInitialized()) {
+        if (isFormulaInit()) {
             mFormula.updateScope(mScope);
+        }
+        if (isSignalInit()) {
+            mSignal.updateScope(mScope);
         }
     }
 
-    private boolean isInitialized() {
+    private boolean isFormulaInit() {
         return mFormula != null;
+    }
+
+    private boolean isAssignInit() {
+        return mAssign != null;
+    }
+
+    private boolean isSignalInit() {
+        return mSignal != null;
     }
 
     public void setFormula(Formula formula) {
@@ -57,6 +73,10 @@ public class Action extends AbstractComplexModel {
 
     public void setAssignment(Assign assign) {
         mAssign = assign;
+    }
+
+    public void setSignal(Signal signal) {
+        mSignal = signal;
     }
 
     public void setScope(List<Var> vars) {
@@ -68,13 +88,18 @@ public class Action extends AbstractComplexModel {
         return mScope;
     }
 
-    public void execute() {
+    public void execute(OutputStream writer) throws IOException {
         try {
-            if (isInitialized() && mFormula.evaluate()) {
-                System.out.println("Precondition is true.");
-                mAssign.execute();
+            if (isFormulaInit() && mFormula.evaluate()) {
+                writer.write(new String("Precondition is true.\n").getBytes());
+                if (isAssignInit()) {
+                    mAssign.execute(writer);
+                }
+                if (isSignalInit()) {
+                    mSignal.execute(writer);
+                }
             } else {
-                System.out.println("Precondition is false.");
+                writer.write(new String("Precondition is false.").getBytes());
             }
         } catch (VarNotInScopeException e) {
             System.out.println("Error during the exection of action [" + mName + "]:\n" + e.getMessage());

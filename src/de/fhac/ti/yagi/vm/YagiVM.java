@@ -127,6 +127,10 @@ public class YagiVM {
         return mMemory;
     }
 
+    public OutputStream getOutputStream() {
+        return mOutputStream;
+    }
+
     public void output(String message) {
         try {
             if (message != null) {

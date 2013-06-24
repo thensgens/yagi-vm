@@ -10,22 +10,22 @@ options {
 @header {
   package de.fhac.ti.yagi.gen;
   
-    import java.util.HashMap;
     import java.util.Map;
-    import java.util.HashSet;
     import java.util.Set;
     import java.util.ArrayList;
     import java.util.List;
+    
     import de.fhac.ti.yagi.vm.YagiVM;
     import de.fhac.ti.yagi.vm.memory.MemoryManagement;
-    import de.fhac.ti.yagi.vm.memory.MemoryManagement.TermType;    
+    import de.fhac.ti.yagi.vm.memory.MemoryManagement.TermType;
+       
     import de.fhac.ti.yagi.vm.memory.SetType;
     import de.fhac.ti.yagi.vm.memory.models.Fluent;
     import de.fhac.ti.yagi.vm.memory.models.Fact;
-    import de.fhac.ti.yagi.vm.memory.models.Value;
     import de.fhac.ti.yagi.vm.memory.models.Var;
     import de.fhac.ti.yagi.vm.memory.models.action.Action;
     import de.fhac.ti.yagi.vm.memory.models.action.Assign;
+    import de.fhac.ti.yagi.vm.memory.models.action.Signal;
     import de.fhac.ti.yagi.vm.memory.models.action.Assign.AssignState;    
     import de.fhac.ti.yagi.vm.memory.models.action.Formula;
     import de.fhac.ti.yagi.vm.memory.models.action.Formula.FormulaRule;
@@ -36,6 +36,8 @@ options {
     import de.fhac.ti.yagi.vm.memory.models.action.CompOperator;
     import de.fhac.ti.yagi.vm.memory.SetItem;    
     import de.fhac.ti.yagi.vm.memory.models.AbstractSimpleModel;
+    
+    import java.io.IOException;
     import de.fhac.ti.yagi.vm.exceptions.InvalidModelException;
     import de.fhac.ti.yagi.vm.exceptions.TermAlreadyDeclaredException;
     import de.fhac.ti.yagi.vm.exceptions.IncompatibleOperationException;
@@ -123,11 +125,12 @@ action_exec
 		        Action action = (Action)mMemory.getTerm($i.text);
 		        try {
 		            action.updateScope($a.args);
-		            action.execute();
+		            action.execute(mInstance.getOutputStream());
 		        } catch (ArgumentCountMismatchException e) {
 		            mInstance.output("Argument count mismatch.");
 		        } catch (ArgumentNotValidException e) {
 		           mInstance.output(e.getMessage()); 
+		        } catch (IOException e) {
 		        }
 		    }
 		} ;
@@ -181,7 +184,11 @@ action_decl returns [Action tempAction]
 		('effect:' a=assignment[false] {
 		    $tempAction.setAssignment($a.assignObj);
 		} )?
-		('signal:' valexpr[$tempAction.getScope()])?
+		('signal:' v=valexpr[$tempAction.getScope()] {
+		    Var theVar = new Var($v.name, $v.v, $v.setType);
+		    Signal signal = new Signal(theVar);
+  	            $tempAction.setSignal(signal);
+		} )?
 		'end action' {
 		    // add the new action to the memory model...
 		    try {

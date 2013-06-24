@@ -10,7 +10,6 @@ action argumentMismatch($foo, $bar, $baz) precondition: $foo != $bar effect: on 
 action staticExpr($foo, $bar) precondition: ($foo < $bar and true) effect: on += {23}; end action
 action nested($foo, $bar) precondition: ($foo < $bar and ($foo != $bar and $foo < $bar)) effect: on -= {2,3}; end action
 action atom_three($dummy) precondition: $dummy in off effect: on += {4}; end action
+action test_signal($dummy) precondition: true signal: $dummy end action
 
-on
-atom_three(1)
-on
+test_signal("Hello World!")

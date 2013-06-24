@@ -149,12 +149,15 @@ public class Atom implements ConditionObject {
         for (Map.Entry<String, Var> entry : mScope.entrySet()) {
             String key = entry.getKey();
             Var value = entry.getValue();
-            if (mFirstVar.getName().equals(key)) {
-                mFirstVar.setmValue(value.getmValue());
-                mFirstVar.setmSetType(value.getSetType());
-            } else if (mSecondVar.getName().equals(key)) {
-                mSecondVar.setmValue(value.getmValue());
-                mSecondVar.setmSetType(value.getSetType());
+            // the atom's scope should only be updated if it's not a static boolean expression
+            if (!mStaticExpression) {
+                if (mFirstVar.getName().equals(key)) {
+                    mFirstVar.setmValue(value.getmValue());
+                    mFirstVar.setmSetType(value.getSetType());
+                } else if (mSecondVar.getName().equals(key)) {
+                    mSecondVar.setmValue(value.getmValue());
+                    mSecondVar.setmSetType(value.getSetType());
+                }
             }
         }
     }

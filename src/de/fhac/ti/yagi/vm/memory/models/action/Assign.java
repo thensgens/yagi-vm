@@ -1,12 +1,15 @@
 package de.fhac.ti.yagi.vm.memory.models.action;
 
+import de.fhac.ti.yagi.vm.interfaces.Execution;
 import de.fhac.ti.yagi.vm.memory.SetItem;
 import de.fhac.ti.yagi.vm.memory.SetType;
 import de.fhac.ti.yagi.vm.memory.models.AbstractSimpleModel;
 
+import java.io.IOException;
+import java.io.OutputStream;
 import java.util.List;
 
-public class Assign {
+public class Assign implements Execution {
 
     private AssignState mState;
     private AbstractSimpleModel mModel;
@@ -20,8 +23,8 @@ public class Assign {
         this.mElements = mElements;
     }
 
-    public void execute() {
-        System.out.println("Assignment is executed.");
+    public void execute(OutputStream writer) throws IOException {
+        writer.write(new String("Assignment is executed.\n").getBytes());
         if (mState == AssignState.ASSIGN) {
             mModel.clear();
             mModel.setSetType(mType);
