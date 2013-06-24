@@ -264,8 +264,8 @@ assign[boolean execute] returns [Assign assignObj]
 	    Var newVar = new Var($var.id, $valexpr.v, $valexpr.setType);
 	    mMemory.addGlobalVar(newVar);       
 	}
-	| 	var '+=' valexpr ';'
-	|	var '-=' valexpr ';' 
+	| 	var[mMemory.getGlobalVar()] '+=' valexpr[mMemory.getGlobalVar()] ';'
+	|	var[mMemory.getGlobalVar()] '-=' valexpr[mMemory.getGlobalVar()] ';' 
 		;
 
 term returns [boolean exists, String output, String error, String id]
@@ -338,6 +338,19 @@ atom[Map<String, Var> theScope] returns [Atom atomResult, boolean valid, String 
     	    	    $error = "";
 	}
 	|	s1=setexpr c=comp_op s2=setexpr {
+		    if ($s1.valid && $s2.valid) {
+		        $atomResult = new Atom(AtomRule.SECOND, theScope);
+		        $atomResult.setFirstSet($s1.elems);
+		        $atomResult.setFirstSetType($s1.setType);
+		        $atomResult.setSecondSet($s2.elems);
+		        $atomResult.setSecondSetType($s2.setType);
+		        $atomResult.setCompOp($c.op);
+		        $valid = true;
+    	    	        $error = "";
+    	    	    } else {
+		        $error = $s1.error + "\n" + $s2.error;
+		    }
+		    $valid = $s1.valid && $s2.valid;
 	}
 	|	v1=value[mMemory.getGlobalVar()] 'in' s2=setexpr {
 	            if ($s2.valid) {
