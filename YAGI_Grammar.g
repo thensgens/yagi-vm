@@ -264,8 +264,8 @@ assign[boolean execute] returns [Assign assignObj]
 	    Var newVar = new Var($var.id, $valexpr.v, $valexpr.setType);
 	    mMemory.addGlobalVar(newVar);       
 	}
-	//| 	var '+=' valexpr ';'
-	//|	var '-=' valexpr ';' 
+	| 	var '+=' valexpr ';'
+	|	var '-=' valexpr ';' 
 		;
 
 term returns [boolean exists, String output, String error, String id]
