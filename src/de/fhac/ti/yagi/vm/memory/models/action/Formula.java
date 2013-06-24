@@ -86,4 +86,14 @@ public class Formula implements ConditionObject {
         FOURTH,
         FIFTH
     }
+
+    @Override
+    public String toString() {
+        return "Formula { " +
+                "mAtom=" + mAtom +
+                ", mFormula=" + mFormula +
+                ", mConnective=" + mConnective +
+                ", mRule=" + mRule +
+                " }";
+    }
 }

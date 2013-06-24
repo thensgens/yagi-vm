@@ -1,4 +1,4 @@
-// $ANTLR 3.4 /home/thens/yagi/yagi-vm/YAGI_Grammar.g 2013-06-24 12:29:22
+// $ANTLR 3.4 /home/thens/yagi/yagi-vm/YAGI_Grammar.g 2013-06-24 15:16:08
 package de.fhac.ti.yagi.gen;
 
 import org.antlr.runtime.*;
@@ -41,6 +41,7 @@ public class YAGI_GrammarLexer extends Lexer {
     public static final int T__38=38;
     public static final int T__39=39;
     public static final int T__40=40;
+    public static final int T__41=41;
     public static final int COMMENT=4;
     public static final int ID=5;
     public static final int INT=6;
@@ -396,10 +397,10 @@ public class YAGI_GrammarLexer extends Lexer {
         try {
             int _type = T__24;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:24:7: ( 'and' )
-            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:24:9: 'and'
+            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:24:7: ( 'actions' )
+            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:24:9: 'actions'
             {
-            match("and"); 
+            match("actions"); 
 
 
 
@@ -419,10 +420,10 @@ public class YAGI_GrammarLexer extends Lexer {
         try {
             int _type = T__25;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:25:7: ( 'effect:' )
-            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:25:9: 'effect:'
+            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:25:7: ( 'and' )
+            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:25:9: 'and'
             {
-            match("effect:"); 
+            match("and"); 
 
 
 
@@ -442,10 +443,10 @@ public class YAGI_GrammarLexer extends Lexer {
         try {
             int _type = T__26;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:26:7: ( 'end action' )
-            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:26:9: 'end action'
+            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:26:7: ( 'effect:' )
+            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:26:9: 'effect:'
             {
-            match("end action"); 
+            match("effect:"); 
 
 
 
@@ -465,10 +466,10 @@ public class YAGI_GrammarLexer extends Lexer {
         try {
             int _type = T__27;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:27:7: ( 'fact' )
-            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:27:9: 'fact'
+            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:27:7: ( 'end action' )
+            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:27:9: 'end action'
             {
-            match("fact"); 
+            match("end action"); 
 
 
 
@@ -488,10 +489,10 @@ public class YAGI_GrammarLexer extends Lexer {
         try {
             int _type = T__28;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:28:7: ( 'facts' )
-            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:28:9: 'facts'
+            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:28:7: ( 'fact' )
+            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:28:9: 'fact'
             {
-            match("facts"); 
+            match("fact"); 
 
 
 
@@ -511,10 +512,10 @@ public class YAGI_GrammarLexer extends Lexer {
         try {
             int _type = T__29;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:29:7: ( 'false' )
-            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:29:9: 'false'
+            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:29:7: ( 'facts' )
+            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:29:9: 'facts'
             {
-            match("false"); 
+            match("facts"); 
 
 
 
@@ -534,10 +535,10 @@ public class YAGI_GrammarLexer extends Lexer {
         try {
             int _type = T__30;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:30:7: ( 'fluent' )
-            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:30:9: 'fluent'
+            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:30:7: ( 'false' )
+            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:30:9: 'false'
             {
-            match("fluent"); 
+            match("false"); 
 
 
 
@@ -557,10 +558,10 @@ public class YAGI_GrammarLexer extends Lexer {
         try {
             int _type = T__31;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:31:7: ( 'fluents' )
-            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:31:9: 'fluents'
+            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:31:7: ( 'fluent' )
+            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:31:9: 'fluent'
             {
-            match("fluents"); 
+            match("fluent"); 
 
 
 
@@ -580,10 +581,10 @@ public class YAGI_GrammarLexer extends Lexer {
         try {
             int _type = T__32;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:32:7: ( 'in' )
-            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:32:9: 'in'
+            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:32:7: ( 'fluents' )
+            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:32:9: 'fluents'
             {
-            match("in"); 
+            match("fluents"); 
 
 
 
@@ -603,10 +604,10 @@ public class YAGI_GrammarLexer extends Lexer {
         try {
             int _type = T__33;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:33:7: ( 'list' )
-            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:33:9: 'list'
+            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:33:7: ( 'in' )
+            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:33:9: 'in'
             {
-            match("list"); 
+            match("in"); 
 
 
 
@@ -626,10 +627,10 @@ public class YAGI_GrammarLexer extends Lexer {
         try {
             int _type = T__34;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:34:7: ( 'not' )
-            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:34:9: 'not'
+            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:34:7: ( 'list' )
+            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:34:9: 'list'
             {
-            match("not"); 
+            match("list"); 
 
 
 
@@ -649,10 +650,10 @@ public class YAGI_GrammarLexer extends Lexer {
         try {
             int _type = T__35;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:35:7: ( 'or' )
-            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:35:9: 'or'
+            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:35:7: ( 'not' )
+            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:35:9: 'not'
             {
-            match("or"); 
+            match("not"); 
 
 
 
@@ -672,10 +673,10 @@ public class YAGI_GrammarLexer extends Lexer {
         try {
             int _type = T__36;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:36:7: ( 'precondition:' )
-            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:36:9: 'precondition:'
+            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:36:7: ( 'or' )
+            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:36:9: 'or'
             {
-            match("precondition:"); 
+            match("or"); 
 
 
 
@@ -695,10 +696,10 @@ public class YAGI_GrammarLexer extends Lexer {
         try {
             int _type = T__37;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:37:7: ( 'signal:' )
-            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:37:9: 'signal:'
+            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:37:7: ( 'precondition:' )
+            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:37:9: 'precondition:'
             {
-            match("signal:"); 
+            match("precondition:"); 
 
 
 
@@ -718,10 +719,10 @@ public class YAGI_GrammarLexer extends Lexer {
         try {
             int _type = T__38;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:38:7: ( 'true' )
-            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:38:9: 'true'
+            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:38:7: ( 'signal:' )
+            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:38:9: 'signal:'
             {
-            match("true"); 
+            match("signal:"); 
 
 
 
@@ -741,10 +742,12 @@ public class YAGI_GrammarLexer extends Lexer {
         try {
             int _type = T__39;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:39:7: ( '{' )
-            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:39:9: '{'
+            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:39:7: ( 'true' )
+            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:39:9: 'true'
             {
-            match('{'); 
+            match("true"); 
+
+
 
             }
 
@@ -762,10 +765,10 @@ public class YAGI_GrammarLexer extends Lexer {
         try {
             int _type = T__40;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:40:7: ( '}' )
-            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:40:9: '}'
+            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:40:7: ( '{' )
+            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:40:9: '{'
             {
-            match('}'); 
+            match('{'); 
 
             }
 
@@ -778,15 +781,36 @@ public class YAGI_GrammarLexer extends Lexer {
     }
     // $ANTLR end "T__40"
 
+    // $ANTLR start "T__41"
+    public final void mT__41() throws RecognitionException {
+        try {
+            int _type = T__41;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
+            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:41:7: ( '}' )
+            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:41:9: '}'
+            {
+            match('}'); 
+
+            }
+
+            state.type = _type;
+            state.channel = _channel;
+        }
+        finally {
+        	// do for sure before leaving
+        }
+    }
+    // $ANTLR end "T__41"
+
     // $ANTLR start "WHITESPACE"
     public final void mWHITESPACE() throws RecognitionException {
         try {
             int _type = WHITESPACE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:483:11: ( ( '\\t' | ' ' | '\\r' | '\\n' | '\\u000C' )+ )
-            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:483:13: ( '\\t' | ' ' | '\\r' | '\\n' | '\\u000C' )+
+            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:487:11: ( ( '\\t' | ' ' | '\\r' | '\\n' | '\\u000C' )+ )
+            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:487:13: ( '\\t' | ' ' | '\\r' | '\\n' | '\\u000C' )+
             {
-            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:483:13: ( '\\t' | ' ' | '\\r' | '\\n' | '\\u000C' )+
+            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:487:13: ( '\\t' | ' ' | '\\r' | '\\n' | '\\u000C' )+
             int cnt1=0;
             loop1:
             do {
@@ -843,8 +867,8 @@ public class YAGI_GrammarLexer extends Lexer {
         try {
             int _type = ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:485:3: ( ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' )* )
-            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:485:9: ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' )*
+            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:489:3: ( ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' )* )
+            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:489:9: ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' )*
             {
             if ( (input.LA(1) >= 'A' && input.LA(1) <= 'Z')||input.LA(1)=='_'||(input.LA(1) >= 'a' && input.LA(1) <= 'z') ) {
                 input.consume();
@@ -856,7 +880,7 @@ public class YAGI_GrammarLexer extends Lexer {
             }
 
 
-            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:485:33: ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' )*
+            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:489:33: ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' )*
             loop2:
             do {
                 int alt2=2;
@@ -906,10 +930,10 @@ public class YAGI_GrammarLexer extends Lexer {
         try {
             int _type = INT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:487:4: ( ( '0' .. '9' )+ )
-            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:487:13: ( '0' .. '9' )+
+            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:491:4: ( ( '0' .. '9' )+ )
+            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:491:13: ( '0' .. '9' )+
             {
-            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:487:13: ( '0' .. '9' )+
+            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:491:13: ( '0' .. '9' )+
             int cnt3=0;
             loop3:
             do {
@@ -964,12 +988,12 @@ public class YAGI_GrammarLexer extends Lexer {
         try {
             int _type = STRING;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:489:7: ( '\"' (~ ( '\\\\' | '\"' ) )* '\"' )
-            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:489:13: '\"' (~ ( '\\\\' | '\"' ) )* '\"'
+            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:493:7: ( '\"' (~ ( '\\\\' | '\"' ) )* '\"' )
+            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:493:13: '\"' (~ ( '\\\\' | '\"' ) )* '\"'
             {
             match('\"'); 
 
-            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:489:17: (~ ( '\\\\' | '\"' ) )*
+            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:493:17: (~ ( '\\\\' | '\"' ) )*
             loop4:
             do {
                 int alt4=2;
@@ -1021,7 +1045,7 @@ public class YAGI_GrammarLexer extends Lexer {
         try {
             int _type = COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:491:8: ( '//' (~ ( '\\n' | '\\r' ) )* ( '\\r' )? '\\n' | '/*' ( options {greedy=false; } : . )* '*/' )
+            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:495:8: ( '//' (~ ( '\\n' | '\\r' ) )* ( '\\r' )? '\\n' | '/*' ( options {greedy=false; } : . )* '*/' )
             int alt8=2;
             int LA8_0 = input.LA(1);
 
@@ -1051,13 +1075,13 @@ public class YAGI_GrammarLexer extends Lexer {
             }
             switch (alt8) {
                 case 1 :
-                    // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:491:13: '//' (~ ( '\\n' | '\\r' ) )* ( '\\r' )? '\\n'
+                    // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:495:13: '//' (~ ( '\\n' | '\\r' ) )* ( '\\r' )? '\\n'
                     {
                     match("//"); 
 
 
 
-                    // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:491:18: (~ ( '\\n' | '\\r' ) )*
+                    // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:495:18: (~ ( '\\n' | '\\r' ) )*
                     loop5:
                     do {
                         int alt5=2;
@@ -1091,7 +1115,7 @@ public class YAGI_GrammarLexer extends Lexer {
                     } while (true);
 
 
-                    // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:491:32: ( '\\r' )?
+                    // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:495:32: ( '\\r' )?
                     int alt6=2;
                     int LA6_0 = input.LA(1);
 
@@ -1100,7 +1124,7 @@ public class YAGI_GrammarLexer extends Lexer {
                     }
                     switch (alt6) {
                         case 1 :
-                            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:491:32: '\\r'
+                            // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:495:32: '\\r'
                             {
                             match('\r'); 
 
@@ -1117,13 +1141,13 @@ public class YAGI_GrammarLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:493:13: '/*' ( options {greedy=false; } : . )* '*/'
+                    // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:497:13: '/*' ( options {greedy=false; } : . )* '*/'
                     {
                     match("/*"); 
 
 
 
-                    // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:493:18: ( options {greedy=false; } : . )*
+                    // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:497:18: ( options {greedy=false; } : . )*
                     loop7:
                     do {
                         int alt7=2;
@@ -1148,7 +1172,7 @@ public class YAGI_GrammarLexer extends Lexer {
 
                         switch (alt7) {
                     	case 1 :
-                    	    // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:493:46: .
+                    	    // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:497:46: .
                     	    {
                     	    matchAny(); 
 
@@ -1181,8 +1205,8 @@ public class YAGI_GrammarLexer extends Lexer {
     // $ANTLR end "COMMENT"
 
     public void mTokens() throws RecognitionException {
-        // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:1:8: ( T__9 | T__10 | T__11 | T__12 | T__13 | T__14 | T__15 | T__16 | T__17 | T__18 | T__19 | T__20 | T__21 | T__22 | T__23 | T__24 | T__25 | T__26 | T__27 | T__28 | T__29 | T__30 | T__31 | T__32 | T__33 | T__34 | T__35 | T__36 | T__37 | T__38 | T__39 | T__40 | WHITESPACE | ID | INT | STRING | COMMENT )
-        int alt9=37;
+        // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:1:8: ( T__9 | T__10 | T__11 | T__12 | T__13 | T__14 | T__15 | T__16 | T__17 | T__18 | T__19 | T__20 | T__21 | T__22 | T__23 | T__24 | T__25 | T__26 | T__27 | T__28 | T__29 | T__30 | T__31 | T__32 | T__33 | T__34 | T__35 | T__36 | T__37 | T__38 | T__39 | T__40 | T__41 | WHITESPACE | ID | INT | STRING | COMMENT )
+        int alt9=38;
         alt9 = dfa9.predict(input);
         switch (alt9) {
             case 1 :
@@ -1442,39 +1466,47 @@ public class YAGI_GrammarLexer extends Lexer {
                 }
                 break;
             case 33 :
-                // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:1:201: WHITESPACE
+                // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:1:201: T__41
+                {
+                mT__41(); 
+
+
+                }
+                break;
+            case 34 :
+                // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:1:207: WHITESPACE
                 {
                 mWHITESPACE(); 
 
 
                 }
                 break;
-            case 34 :
-                // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:1:212: ID
+            case 35 :
+                // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:1:218: ID
                 {
                 mID(); 
 
 
                 }
                 break;
-            case 35 :
-                // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:1:215: INT
+            case 36 :
+                // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:1:221: INT
                 {
                 mINT(); 
 
 
                 }
                 break;
-            case 36 :
-                // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:1:219: STRING
+            case 37 :
+                // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:1:225: STRING
                 {
                 mSTRING(); 
 
 
                 }
                 break;
-            case 37 :
-                // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:1:226: COMMENT
+            case 38 :
+                // /home/thens/yagi/yagi-vm/YAGI_Grammar.g:1:232: COMMENT
                 {
                 mCOMMENT(); 
 
@@ -1492,10 +1524,10 @@ public class YAGI_GrammarLexer extends Lexer {
         "\11\uffff\1\36\1\40\1\42\12\31\15\uffff\6\31\1\67\2\31\1\72\4\31"+
         "\1\77\5\31\1\uffff\1\31\1\106\1\uffff\4\31\1\uffff\1\31\1\uffff"+
         "\1\115\2\31\1\120\1\uffff\2\31\1\123\2\31\1\126\1\uffff\1\127\1"+
-        "\31\1\uffff\2\31\1\uffff\1\133\1\31\2\uffff\1\136\2\31\2\uffff\1"+
-        "\141\1\uffff\1\31\2\uffff\5\31\1\uffff";
+        "\31\1\uffff\2\31\1\uffff\1\134\1\31\2\uffff\1\137\2\31\1\142\2\uffff"+
+        "\1\143\1\uffff\1\31\3\uffff\5\31\1\uffff";
     static final String DFA9_eofS =
-        "\150\uffff";
+        "\152\uffff";
     static final String DFA9_minS =
         "\1\11\10\uffff\3\75\1\143\1\146\1\141\1\156\1\151\1\157\2\162\1"+
         "\151\1\162\15\uffff\1\164\1\144\1\146\1\144\1\143\1\165\1\60\1\163"+
@@ -1503,8 +1535,8 @@ public class YAGI_GrammarLexer extends Lexer {
         "\1\145\1\uffff\1\164\1\60\1\uffff\1\143\1\156\1\145\1\157\1\uffff"+
         "\1\143\1\uffff\1\60\1\145\1\156\1\60\1\uffff\1\157\1\141\1\60\1"+
         "\156\1\164\1\60\1\uffff\1\60\1\164\1\uffff\1\156\1\154\1\uffff\1"+
-        "\60\1\72\2\uffff\1\60\1\144\1\72\2\uffff\1\60\1\uffff\1\151\2\uffff"+
-        "\1\164\1\151\1\157\1\156\1\72\1\uffff";
+        "\60\1\72\2\uffff\1\60\1\144\1\72\1\60\2\uffff\1\60\1\uffff\1\151"+
+        "\3\uffff\1\164\1\151\1\157\1\156\1\72\1\uffff";
     static final String DFA9_maxS =
         "\1\175\10\uffff\3\75\2\156\1\154\1\156\1\151\1\157\2\162\1\151\1"+
         "\162\15\uffff\1\164\1\144\1\146\1\144\1\154\1\165\1\172\1\163\1"+
@@ -1512,16 +1544,16 @@ public class YAGI_GrammarLexer extends Lexer {
         "\1\145\1\uffff\1\164\1\172\1\uffff\1\143\1\156\1\145\1\157\1\uffff"+
         "\1\143\1\uffff\1\172\1\145\1\156\1\172\1\uffff\1\157\1\141\1\172"+
         "\1\156\1\164\1\172\1\uffff\1\172\1\164\1\uffff\1\156\1\154\1\uffff"+
-        "\1\172\1\72\2\uffff\1\172\1\144\1\72\2\uffff\1\172\1\uffff\1\151"+
-        "\2\uffff\1\164\1\151\1\157\1\156\1\72\1\uffff";
+        "\1\172\1\72\2\uffff\1\172\1\144\1\72\1\172\2\uffff\1\172\1\uffff"+
+        "\1\151\3\uffff\1\164\1\151\1\157\1\156\1\72\1\uffff";
     static final String DFA9_acceptS =
-        "\1\uffff\1\1\1\2\1\3\1\4\1\5\1\6\1\7\1\10\15\uffff\1\37\1\40\1\41"+
-        "\1\42\1\43\1\44\1\45\1\12\1\11\1\14\1\13\1\16\1\15\24\uffff\1\30"+
-        "\2\uffff\1\33\4\uffff\1\20\1\uffff\1\22\4\uffff\1\32\6\uffff\1\23"+
-        "\2\uffff\1\31\2\uffff\1\36\2\uffff\1\24\1\25\3\uffff\1\17\1\21\1"+
-        "\uffff\1\26\1\uffff\1\35\1\27\5\uffff\1\34";
+        "\1\uffff\1\1\1\2\1\3\1\4\1\5\1\6\1\7\1\10\15\uffff\1\40\1\41\1\42"+
+        "\1\43\1\44\1\45\1\46\1\12\1\11\1\14\1\13\1\16\1\15\24\uffff\1\31"+
+        "\2\uffff\1\34\4\uffff\1\21\1\uffff\1\23\4\uffff\1\33\6\uffff\1\24"+
+        "\2\uffff\1\32\2\uffff\1\37\2\uffff\1\25\1\26\4\uffff\1\17\1\22\1"+
+        "\uffff\1\27\1\uffff\1\36\1\20\1\30\5\uffff\1\35";
     static final String DFA9_specialS =
-        "\150\uffff}>";
+        "\152\uffff}>";
     static final String[] DFA9_transitionS = {
             "\2\30\1\uffff\2\30\22\uffff\1\30\1\1\1\33\1\uffff\1\2\3\uffff"+
             "\1\3\1\4\1\uffff\1\5\1\6\1\7\1\uffff\1\34\12\32\1\uffff\1\10"+
@@ -1611,25 +1643,27 @@ public class YAGI_GrammarLexer extends Lexer {
             "\1\131",
             "\1\132",
             "",
-            "\12\31\7\uffff\32\31\4\uffff\1\31\1\uffff\32\31",
-            "\1\134",
+            "\12\31\7\uffff\32\31\4\uffff\1\31\1\uffff\22\31\1\133\7\31",
+            "\1\135",
             "",
             "",
-            "\12\31\7\uffff\32\31\4\uffff\1\31\1\uffff\22\31\1\135\7\31",
-            "\1\137",
+            "\12\31\7\uffff\32\31\4\uffff\1\31\1\uffff\22\31\1\136\7\31",
             "\1\140",
+            "\1\141",
+            "\12\31\7\uffff\32\31\4\uffff\1\31\1\uffff\32\31",
             "",
             "",
             "\12\31\7\uffff\32\31\4\uffff\1\31\1\uffff\32\31",
             "",
-            "\1\142",
-            "",
-            "",
-            "\1\143",
             "\1\144",
+            "",
+            "",
+            "",
             "\1\145",
             "\1\146",
             "\1\147",
+            "\1\150",
+            "\1\151",
             ""
     };
 
@@ -1663,7 +1697,7 @@ public class YAGI_GrammarLexer extends Lexer {
             this.transition = DFA9_transition;
         }
         public String getDescription() {
-            return "1:1: Tokens : ( T__9 | T__10 | T__11 | T__12 | T__13 | T__14 | T__15 | T__16 | T__17 | T__18 | T__19 | T__20 | T__21 | T__22 | T__23 | T__24 | T__25 | T__26 | T__27 | T__28 | T__29 | T__30 | T__31 | T__32 | T__33 | T__34 | T__35 | T__36 | T__37 | T__38 | T__39 | T__40 | WHITESPACE | ID | INT | STRING | COMMENT );";
+            return "1:1: Tokens : ( T__9 | T__10 | T__11 | T__12 | T__13 | T__14 | T__15 | T__16 | T__17 | T__18 | T__19 | T__20 | T__21 | T__22 | T__23 | T__24 | T__25 | T__26 | T__27 | T__28 | T__29 | T__30 | T__31 | T__32 | T__33 | T__34 | T__35 | T__36 | T__37 | T__38 | T__39 | T__40 | T__41 | WHITESPACE | ID | INT | STRING | COMMENT );";
         }
     }
  

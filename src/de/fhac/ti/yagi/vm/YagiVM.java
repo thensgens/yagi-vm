@@ -148,6 +148,7 @@ public class YagiVM {
         try {
             instance = new YagiVM(new FileInputStream(new File
                     (DEFAULT_INPUT_FILE)));
+
             //instance = new YagiVM();
             instance.start();
             ExitCode exitCode = instance.stop();

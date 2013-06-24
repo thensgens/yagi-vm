@@ -24,7 +24,7 @@ public class Assign implements Execution {
     }
 
     public void execute(OutputStream writer) throws IOException {
-        writer.write(new String("Assignment is executed.\n").getBytes());
+        writer.write("Assignment is executed.\n".getBytes());
         if (mState == AssignState.ASSIGN) {
             mModel.clear();
             mModel.setSetType(mType);

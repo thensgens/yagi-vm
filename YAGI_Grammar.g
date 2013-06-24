@@ -380,6 +380,10 @@ list_term returns [String output] :
 	|	
 	'facts' {
 	    $output = mMemory.listTerm(TermType.FACT);
+	} 
+	|
+	'actions' {
+	    $output = mMemory.listTerm(TermType.ACTION);
 	} ;
 	// later on more list terms should be supported (e.g. actions, procs, ...)	
 	// ...

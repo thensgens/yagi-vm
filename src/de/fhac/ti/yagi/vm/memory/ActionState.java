@@ -4,6 +4,8 @@ import de.fhac.ti.yagi.vm.exceptions.InvalidModelException;
 import de.fhac.ti.yagi.vm.exceptions.ModelNotFoundException;
 import de.fhac.ti.yagi.vm.interfaces.AbstractModel;
 import de.fhac.ti.yagi.vm.interfaces.State;
+import de.fhac.ti.yagi.vm.memory.models.Fluent;
+import de.fhac.ti.yagi.vm.memory.models.Var;
 import de.fhac.ti.yagi.vm.memory.models.action.Action;
 
 import java.util.HashMap;
@@ -56,8 +58,23 @@ public class ActionState implements State {
 
     @Override
     public String listState() {
-        /* not supported at the moment... */
-        return "";
+        StringBuilder strBuilder = new StringBuilder();
+        for (Map.Entry<String, Action> actionEntry : mActions.entrySet()) {
+            String actionName = actionEntry.getKey();
+            Action action = actionEntry.getValue();
+            strBuilder.append(actionName).append(":  ");
+            // handle the varlist's output
+            for (Map.Entry<String, Var> scopeEntry : action.getScope().entrySet()) {
+                strBuilder.append("Var [").append(scopeEntry.getKey()).append("]").append(" / ");
+            }
+            strBuilder.delete(strBuilder.length() - 3, strBuilder.length()).append("\n");
+
+            // handle formula's output, if present
+            if (action.isFormulaInit()) {
+                strBuilder.append(action.getFormula().toString()).append("\n");
+            }
+        }
+        return strBuilder.toString();
     }
 
     @Override

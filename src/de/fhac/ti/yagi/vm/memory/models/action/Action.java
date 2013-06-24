@@ -7,7 +7,6 @@ import de.fhac.ti.yagi.vm.memory.models.Var;
 
 import java.io.IOException;
 import java.io.OutputStream;
-import java.io.OutputStreamWriter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -55,15 +54,15 @@ public class Action extends AbstractComplexModel implements Execution {
         }
     }
 
-    private boolean isFormulaInit() {
+    public boolean isFormulaInit() {
         return mFormula != null;
     }
 
-    private boolean isAssignInit() {
+    public boolean isAssignInit() {
         return mAssign != null;
     }
 
-    private boolean isSignalInit() {
+    public boolean isSignalInit() {
         return mSignal != null;
     }
 
@@ -86,6 +85,10 @@ public class Action extends AbstractComplexModel implements Execution {
     }
     public Map<String, Var> getScope() {
         return mScope;
+    }
+
+    public Formula getFormula() {
+        return mFormula;
     }
 
     public void execute(OutputStream writer) throws IOException {

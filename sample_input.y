@@ -13,3 +13,4 @@ action atom_three($dummy) precondition: $dummy in off effect: on += {4}; end act
 action test_signal($dummy) precondition: true signal: $dummy end action
 
 test_signal("Hello World!")
+list actions;
