@@ -74,6 +74,9 @@ public class ActionState implements State {
                 strBuilder.append(action.getFormula().toString()).append("\n");
             }
         }
+        if (strBuilder.length() == 0) {
+            strBuilder = new StringBuilder("There are no actions declared yet.");
+        }
         return strBuilder.toString();
     }
 
