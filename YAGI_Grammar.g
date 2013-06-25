@@ -76,14 +76,18 @@ line:  	 declaration
        	         AbstractSimpleModel model = (AbstractSimpleModel)mMemory.getTerm($term.id);
        	         SetType setType = model.getSetType();
 		 Set<SetItem> values = model.getValues();
-		 StringBuilder strBuilder = new StringBuilder();
-		 for (SetItem item : values) {
-            	     // no need for type related conversions here.. just output the
-	             // values's string representation
-	             strBuilder.append(item.toString()).append("/");
+		 if (!model.isEmpty()) {
+		     StringBuilder strBuilder = new StringBuilder();
+		     for (SetItem item : values) {
+            	         // no need for type related conversions here.. just output the
+	                 // values's string representation
+	                 strBuilder.append(item.toString()).append("/");
+		     }
+		     strBuilder.delete(strBuilder.length() - 1, strBuilder.length());
+		     mInstance.output(strBuilder.toString());
+		 } else {
+		     mInstance.output("Term " + $term.id + " is not initialized yet.");
 		 }
-		 strBuilder.delete(strBuilder.length() - 1, strBuilder.length());
-		 mInstance.output(strBuilder.toString());
        	     } else {
 	       	 mInstance.output("Term " + $term.id + " is not defined yet.");
        	     }

@@ -146,10 +146,10 @@ public class YagiVM {
     public static void main(String[] args) {
         YagiVM instance = null;
         try {
-            instance = new YagiVM(new FileInputStream(new File
+            /*instance = new YagiVM(new FileInputStream(new File
                     (DEFAULT_INPUT_FILE)));
-
-            //instance = new YagiVM();
+            */
+            instance = new YagiVM();
             instance.start();
             ExitCode exitCode = instance.stop();
             if (exitCode == ExitCode.OK) {

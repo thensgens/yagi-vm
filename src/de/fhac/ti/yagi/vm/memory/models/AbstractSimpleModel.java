@@ -62,6 +62,10 @@ public abstract class AbstractSimpleModel implements AbstractModel {
         return mValues;
     }
 
+    public boolean isEmpty () {
+        return mValues.size() == 0;
+    }
+
     public void clear() {
         mValues.clear();
     }
