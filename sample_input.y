@@ -15,4 +15,6 @@ action test_atom_three($dummy) precondition: $dummy in baz effect: on += {4}; en
 action test_signal($dummy) precondition: true signal: $dummy end action
 action test_set_comp($dummy) precondition: on > baz end action
 
-test_atom_three("barfu")
+on
+test_atom_three("barfuu")
+on
