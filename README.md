@@ -3,6 +3,9 @@ yagi-vm
 
 Basic virtual machine implementation for the YAGI language specification.
 (See https://code.google.com/p/yagi/ for more information)
+Important: This VM is a proof of concept implementation for a rather small subset of the YAGI language,
+'e.g.' the provided 'elevator.y' file does not work at the moment due to the incomplete state
+of this vm implementation.
 
 How-To Dev Hints
 =======
